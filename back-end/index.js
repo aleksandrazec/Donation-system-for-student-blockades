@@ -1,11 +1,28 @@
 const express = require('express')
+require('dotenv').config()
+const DB = require('./database/databaseConn.js')
+const users= require("./routes/users.js")
+const faculties = require("./routes/faculties.js")
 const app = express()
+const cors = require('cors')
 
 const port = 3333
     
-app.get("/api",(req,res)=>{
-    res.json({ fruits: ["apple", "orange", "banana "]})
+app.get("/",(req,res)=>{
+res.send("hola")
 })
+
+app.use(express.json());
+
+app.use(express.urlencoded({extended : true}));
+app.use(cors({
+    origin: `http://localhost:${port}`,
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    credentials: true
+ }))
+ 
+app.use('/users', users);
+app.use('/faculties', faculties)
 
 app.listen(process.env.PORT || port, ()=>{
 console.log(`Server is running on port: ${process.env.PORT || port}`)
