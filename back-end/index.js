@@ -3,6 +3,8 @@ require('dotenv').config()
 const DB = require('./database/databaseConn.js')
 const users= require("./routes/users.js")
 const faculties = require("./routes/faculties.js")
+const donationrequests = require("./routes/donationrequests.js")
+const forums = require("./routes/forums.js")
 const app = express()
 const cors = require('cors')
 
@@ -23,6 +25,8 @@ app.use(cors({
  
 app.use('/users', users);
 app.use('/faculties', faculties)
+app.use('/donationrequests', donationrequests)
+app.use('/forums', forums)
 
 app.listen(process.env.PORT || port, ()=>{
 console.log(`Server is running on port: ${process.env.PORT || port}`)

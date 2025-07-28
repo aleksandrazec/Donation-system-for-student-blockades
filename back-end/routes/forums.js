@@ -1,0 +1,128 @@
+const express= require("express")
+const forums = express.Router();
+const DB=require('../database/databaseConn.js')
+
+var bodyParser = require('body-parser')
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+forums.post('/create', urlencodedParser, async (req, res) => {
+ var prompt = req.body.prompt;
+ var faculty_id = req.body.faculty_id;
+   if (prompt&&faculty_id)
+   {
+       try
+       {
+        let queryResult=await DB.createForum(prompt, faculty_id);
+               if (queryResult.affectedRows) {
+               console.log("Forum created")
+               res.json({
+                "success": true,
+                "message": "Forum created"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+forums.post('/delete', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.deleteForum(id);
+               if (queryResult.affectedRows) {
+               console.log("Forum deleted")
+               res.json({
+                "success": true,
+                "message": "Forum deleted"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+forums.post('/comment', urlencodedParser, async (req, res) => {
+ var text = req.body.text;
+ var user_id = req.body.user_id;
+ var forum_id=req.body.forum_id;
+ var reply_id=req.body.reply_id;
+
+ var isCompleteRequest=text&&user_id&&forum_id&&reply_id
+   if (isCompleteRequest)
+   {
+       try
+       {
+        let queryResult=await DB.createComment(text, user_id, forum_id, reply_id);
+               if (queryResult.affectedRows) {
+               console.log("Comment posted")
+               res.json({
+                "success": true,
+                "message": "Comment posted"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+forums.post('/deletecomment', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.deleteComment(id);
+               if (queryResult.affectedRows) {
+               console.log("Comment deleted")
+               res.json({
+                "success": true,
+                "message": "Comment deleted"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+module.exports=forums

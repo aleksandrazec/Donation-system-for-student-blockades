@@ -71,4 +71,99 @@ faculties.post('/addfac', urlencodedParser, async (req, res) => {
    res.end();
 });
 
+faculties.post('/manager', urlencodedParser, async (req, res) => {
+ var faculty_id = req.body.faculty_id;
+ var student_id = req.body.student_id;
+   if (faculty_id&&student_id)
+   {
+       try
+       {
+        let queryResult=await DB.assignStudentManager(faculty_id, student_id);
+               if (queryResult.affectedRows) {
+               console.log("Student manager assigned")
+               res.json({
+                "success": true,
+                "message": "Student manager assigned"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+faculties.post('/update', urlencodedParser, async (req, res) => {
+
+    var id = req.body.id;
+    var field = req.body.field;
+    var info = req.body.info;
+    var isComplete = id && field && info
+    if (isComplete) {
+        if (field == 'address' || field == 'coordinates' || field == 'city' || field == 'working_hours' || field=='university') {
+            try {
+                var queryResult = await DB.updateFacultyInfo(id, field, info)
+                if (queryResult.affectedRows) {
+                    console.log("Faculty info updated")
+                    res.json({
+                        "success": true,
+                        "message": "Faculty info updated."
+                    })
+                }
+            }
+            catch (err) {
+                console.log(err)
+                res.status(500)
+            }
+        }
+        else if (field == 'id' || field == 'user_id') {
+            console.log("You can't update these fields.")
+        }
+        else {
+            console.log("Invalid field")
+        }
+    }
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
+ });
+
+
+faculties.post('/removefac', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.deleteFaculty(id);
+               if (queryResult.affectedRows) {
+               console.log("Faculty removed")
+               res.json({
+                "success": true,
+                "message": "Faculty removed"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
 module.exports=faculties
