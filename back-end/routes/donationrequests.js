@@ -40,7 +40,7 @@ donationrequests.post('/subtype', urlencodedParser, async (req, res) => {
    {
        try
        {
-        let queryResult=await DB.addDonationSubtype(subtype, type);
+        let queryResult=await DB.createDonationSubtype(subtype, type);
                if (queryResult.affectedRows) {
                console.log("New donation subtype added!!")
                res.json({

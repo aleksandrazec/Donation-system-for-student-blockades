@@ -67,6 +67,38 @@ forums.post('/comment', urlencodedParser, async (req, res) => {
  var text = req.body.text;
  var user_id = req.body.user_id;
  var forum_id=req.body.forum_id;
+
+ var isCompleteRequest=text&&user_id&&forum_id
+   if (isCompleteRequest)
+   {
+       try
+       {
+        let queryResult=await DB.createComment(text, user_id, forum_id);
+               if (queryResult.affectedRows) {
+               console.log("Comment posted")
+               res.json({
+                "success": true,
+                "message": "Comment posted"
+               })
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+forums.post('/reply', urlencodedParser, async (req, res) => {
+ var text = req.body.text;
+ var user_id = req.body.user_id;
+ var forum_id=req.body.forum_id;
  var reply_id=req.body.reply_id;
 
  var isCompleteRequest=text&&user_id&&forum_id&&reply_id
@@ -74,7 +106,7 @@ forums.post('/comment', urlencodedParser, async (req, res) => {
    {
        try
        {
-        let queryResult=await DB.createComment(text, user_id, forum_id, reply_id);
+        let queryResult=await DB.createReply(text, user_id, forum_id, reply_id);
                if (queryResult.affectedRows) {
                console.log("Comment posted")
                res.json({

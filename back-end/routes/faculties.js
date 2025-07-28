@@ -41,15 +41,14 @@ faculties.post('/addfac', urlencodedParser, async (req, res) => {
  var coordinates = req.body.coordinates;
  var working_hours = req.body.working_hours;
  var university = req.body.university;
- var id = req.body.id;
 
- var isCompleteFaculty = name && city && address && coordinates && working_hours && university && id
+ var isCompleteFaculty = name && city && address && coordinates && working_hours && university
 
    if (isCompleteFaculty)
    {
        try
        {
-        let queryResult=await DB.addFaculty(name, city, address, coordinates, working_hours, university, id);
+        let queryResult=await DB.addFaculty(name, city, address, coordinates, working_hours, university);
                if (queryResult.affectedRows) {
                console.log("New faculty registered!!")
                res.json({

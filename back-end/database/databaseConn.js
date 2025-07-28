@@ -60,9 +60,9 @@ dataPool.setRole=(id, role)=>{
 
 
 
-dataPool.addFaculty=(name, city, address, coordinates, workingHours, university, id)=>{
+dataPool.addFaculty=(name, city, address, coordinates, workingHours, university)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`INSERT INTO Faculty (name, city, address, coordinates, working_hours, university, user_id) VALUES (?,?,?,?,?,?,?)`, [name, city, address, coordinates, workingHours, university, id], (err, res)=>{
+    conn.query(`INSERT INTO Faculty (name, city, address, coordinates, working_hours, university) VALUES (?,?,?,?,?,?)`, [name, city, address, coordinates, workingHours, university], (err, res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -116,7 +116,7 @@ dataPool.addDonationType=(newType)=>{
 
 dataPool.createDonationSubtype=(subtype, type)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`INSERT INTO 'Type of donation' (subtype, type) VALUES (?,?)`, [subtype, type], (err,res)=>{
+    conn.query('INSERT INTO Type_of_donation (subtype, type) VALUES (?,?)', [subtype, type], (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -125,7 +125,7 @@ dataPool.createDonationSubtype=(subtype, type)=>{
 
 dataPool.createDonationRequest=(quantity, urgencyLevel, item, facultyID)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`INSERT INTO 'Donation request' (quantity, urgency_level, item, faculty_id) VALUES (?,?,?,?)`, [quantity, urgencyLevel, item, facultyID], (err,res)=>{
+    conn.query('INSERT INTO Donation_request (quantity, urgency_level, item, faculty_id) VALUES (?,?,?,?)', [quantity, urgencyLevel, item, facultyID], (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -134,7 +134,7 @@ dataPool.createDonationRequest=(quantity, urgencyLevel, item, facultyID)=>{
 
 dataPool.updateDonationRequest=(id, field, info)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`UPDATE 'Donation request' SET ${field} = ? WHERE id = ?`, [field, info, id], (err,res)=>{
+    conn.query(`UPDATE Donation_request SET ${field} = ? WHERE id = ?`, [info, id], (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -143,7 +143,7 @@ dataPool.updateDonationRequest=(id, field, info)=>{
 
 dataPool.deleteDonationRequest=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`DELETE FROM 'Donation request' WHERE id = ?`, id, (err,res)=>{
+    conn.query('DELETE FROM Donation_request WHERE id = ?', id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -167,8 +167,16 @@ dataPool.deleteForum=(id)=>{
     })
   })
 }
+dataPool.createComment=(text, userID, forumID)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`INSERT INTO Comment (text, user_id, forum_id) VALUES (?,?,?)`, [text, userID, forumID], (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
 
-dataPool.createComment=(text, userID, forumID, replyID)=>{
+dataPool.createReply=(text, userID, forumID, replyID)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`INSERT INTO Comment (text, user_id, forum_id, reply_id) VALUES (?,?,?,?)`, [text, userID, forumID, replyID], (err,res)=>{
       if(err){return reject(err)}
