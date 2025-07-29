@@ -11,7 +11,16 @@ faculties.post('/adduni', urlencodedParser, async (req, res) => {
    {
        try
        {
-        let queryResult=await DB.addUniversity(university);
+        let queryResult1=await DB.listUniversitiesENUM();
+        console.log(queryResult1)
+        var data = queryResult1[0].COLUMN_TYPE;
+        console.log(data)
+        data=data.slice(5, data.length-1);
+
+        console.log(data)
+        var newsql=`ALTER TABLE Faculty MODIFY university ENUM(`+data+`,'`+university+`')`
+        
+        let queryResult=await DB.runSQL(newsql)
                if (queryResult.affectedRows) {
                console.log("New university registered!!")
                res.json({
@@ -162,6 +171,29 @@ faculties.post('/removefac', urlencodedParser, async (req, res) => {
        console.log("Field is missing!")
        res.status(204)
    }
+   res.end();
+});
+
+faculties.get('/listuni', urlencodedParser, async (req, res) => {
+console.log("in function")
+    try{
+        let queryResult=await DB.listUniversities();
+               if(queryResult.length>0)
+               {
+                    console.log(queryResult)
+                    console.log("OK");
+                    res.json(queryResult);      
+                    res.status(200)
+               }else
+               {
+                  console.log("no unis?");
+                  res.status(204)  
+               }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
    res.end();
 });
 

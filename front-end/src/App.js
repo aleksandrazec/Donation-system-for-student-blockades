@@ -1,40 +1,17 @@
-import { useState, useEffect } from "react";
-import logo from './logo.svg';
 import './App.css';
-import axios from "axios";
+import React from 'react';
+import TabContainer from './components/tab-navigator/TabContainer';
+import {Outlet} from 'react-router';
 
-function App() {
+class App extends React.Component{
 
-  const [backendData, setBackendData] = useState([{}])
-
-  useEffect(()=>{
-    fetch("/api").then(
-      response => response.json()
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
-  }, [])
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  render(){
+    return(
+        <TabContainer>
+        <h1>Search through donations</h1>
+        <Outlet/>
+       </TabContainer>
+    );
+  }
 }
-
 export default App;

@@ -105,9 +105,34 @@ dataPool.addUniversity=(university)=>{
   })
 }
 
-dataPool.addDonationType=(newType)=>{
+dataPool.listUniversities=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`ALTER TYPE type ADD VALUE ?`, newType, (err,res)=>{
+    conn.query('SELECT DISTINCT university FROM Faculty', (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+dataPool.listUniversitiesENUM=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Faculty' AND COLUMN_NAME = 'university'`, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+dataPool.runSQL=(sql)=>{
+    return new Promise((resolve, reject)=>{
+    conn.query(sql, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listDonationTypeENUM=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Type_of_donation' AND COLUMN_NAME = 'type'`, (err, res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })

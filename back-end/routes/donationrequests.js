@@ -11,7 +11,15 @@ donationrequests.post('/type', urlencodedParser, async (req, res) => {
    {
        try
        {
-        let queryResult=await DB.addDonationType(type);
+        let queryResult1=await DB.listDonationTypeENUM();
+        console.log(queryResult1)
+        var data = queryResult1[0].COLUMN_TYPE;
+        console.log(data)
+        data=data.slice(5, data.length-1);
+        console.log(data)
+        var newsql=`ALTER TABLE Type_of_donation MODIFY type ENUM(`+data+`,'`+type+`')`
+        
+        let queryResult=await DB.runSQL(newsql)
                if (queryResult.affectedRows) {
                console.log("New donation type added!!")
                res.json({

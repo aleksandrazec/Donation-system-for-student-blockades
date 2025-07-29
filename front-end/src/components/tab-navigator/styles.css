@@ -1,0 +1,12 @@
+.tab-navigator{
+
+    .tab-container{
+        display: flex;
+        gap: 5px;
+    }
+
+    .tab-item{
+        background: gray;
+        padding: 2px;
+    }
+}
