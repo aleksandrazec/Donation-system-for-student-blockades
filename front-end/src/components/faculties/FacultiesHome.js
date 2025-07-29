@@ -3,12 +3,17 @@ import api from '../../services/api';
 import UniversityCard from './UniversityCard';
 
 function FacultiesHome(props){
-    const [unis, setUnis]=useState([]);
+    const [unis, setUnis]=useState();
 
     const getData = async()=>{
         try{
-            const data = await api.get(`/faculties/listuni`)
-            setUnis(data)
+            api.get(`/faculties/listuni`)
+            .then((result)=>{
+                console.log(result.data);
+                setUnis(result.data)
+            })
+            .catch(err=>console.error('api error: ', err));
+            
         }catch(error){
             console.error('error: ', error)
         }
@@ -16,13 +21,16 @@ function FacultiesHome(props){
 
     useEffect(()=>{
         getData();
-        console.log(unis);
     },[])
 
     return(
         <div>
+            <p>faculties home</p>
             {
-                unis.map(uni=> <UniversityCard name={uni.university}/>)
+                unis ?
+                unis.map(uni => <UniversityCard name={uni.university} key={uni.key}/>)
+                :
+                <p></p>
             }
         </div>
     )

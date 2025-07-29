@@ -17,8 +17,9 @@ res.send("hola")
 app.use(express.json());
 
 app.use(express.urlencoded({extended : true}));
+
 app.use(cors({
-    origin: `http://localhost:${port}`,
+    origin: `http://88.200.63.148:3000`,
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
     credentials: true
  }))

@@ -78,6 +78,55 @@ faculties.post('/addfac', urlencodedParser, async (req, res) => {
    }
    res.end();
 });
+faculties.post('/find', urlencodedParser, async (req, res) => {
+ var university = req.body.university;
+   if (university)
+   {
+       try
+       {
+        let queryResult=await DB.findFaculties(university);
+               if (queryResult.length>0) {
+               console.log("faculties found")
+               res.json(queryResult)
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
+
+faculties.post('/info', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.showFacultyInfo(id);
+               if (queryResult.length>0) {
+               console.log("faculties info found")
+               res.json(queryResult)
+             }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field is missing!")
+       res.status(204)
+   }
+   res.end();
+});
 
 faculties.post('/manager', urlencodedParser, async (req, res) => {
  var faculty_id = req.body.faculty_id;

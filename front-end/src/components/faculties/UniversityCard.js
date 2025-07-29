@@ -1,11 +1,23 @@
-import { useState, useEffect } from "react";
-import api from '../../services/api';
+import {useNavigate} from 'react-router';
 
 function UniversityCard(props){
-   const{name}=props;
+    const navigate=useNavigate()
+
+   const{
+    name
+   }=props;
+
+   const goToPage=async()=>{
+    try {
+        navigate(`/university/${name}`)
+    } catch (error) {
+        console.error(error)
+    }
+   }
+
     return(
         <div>
-            <button>
+            <button onClick={()=>{goToPage()}}>
                 {name}
             </button>
         </div>

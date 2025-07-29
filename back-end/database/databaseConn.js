@@ -87,6 +87,15 @@ dataPool.updateFacultyInfo=(id, field, info)=>{
   })
 }
 
+dataPool.showFacultyInfo=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT * FROM Faculty WHERE id = ?`, id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.deleteFaculty=(id)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`DELETE FROM Faculty WHERE id = ?`, id, (err,res)=>{
@@ -107,7 +116,8 @@ dataPool.addUniversity=(university)=>{
 
 dataPool.listUniversities=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query('SELECT DISTINCT university FROM Faculty', (err, res)=>{
+    conn.query(`SELECT university, ROW_NUMBER() OVER (ORDER BY university) AS 'key' FROM (SELECT DISTINCT university FROM Faculty) distinct_unis`
+      , (err, res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -124,6 +134,15 @@ dataPool.listUniversitiesENUM=()=>{
 dataPool.runSQL=(sql)=>{
     return new Promise((resolve, reject)=>{
     conn.query(sql, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.findFaculties=(uni)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT * FROM Faculty WHERE university = ?', uni, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
