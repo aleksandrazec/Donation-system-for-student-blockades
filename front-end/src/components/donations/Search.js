@@ -1,119 +1,47 @@
 import { use, useEffect, useState } from 'react';
 import api from '../../services/api';
+import Checkbox from './Checkbox'
+import Filter from './Filter'
+import Sort from './Sort'
 
 function Search(props) {
+    const [settings, setSettings] = useState({
+        filter: false,
+        sorting: false,
+        search: false
+    })
 
-    const [urgency, setUrgency] = useState('')
-    const [quantity, setQuantity] = useState(0)
-    const [faculties, setFaculties] = useState('')
-    const [items, setItems] = useState('')
-    const [types, setTypes]= useState('')
-    const [unis, setUnis]= useState('')
-    const [cities, setCities] = useState('')
+    const [textInput, setTextInput ]=useState('')
 
-    useEffect(() => {
-        const getTypes = async () => {
-            try {
-                const { data } = await api.get('/donationrequests/typelist')
-                setTypes(data);
-                console.log(data)
-            } catch (error) {
-                console.error(error.response?.data?.error || error.message)
-            }
-        }
-        getTypes()
-    }, [])
-
-    useEffect(() => {
-        const getItems = async () => {
-            try {
-                const { data } = await api.get('/donationrequests/subtypelist')
-                console.log(data)
-                setItems(data);
-            } catch (error) {
-                console.error(error.response?.data?.error || error.message)
-            }
-        }
-        getItems()
-    }, [])
-
-    useEffect(() => {
-        const getFaculties = () => {
-            try {
-                api.get(`/faculties/listfac`)
-                    .then(result => {
-                        console.log(result.data)
-                        setFaculties(result.data)
-                    })
-                    .catch(err => console.error(err))
-            } catch (error) {
-                console.error(error)
-            }
-        }
-        getFaculties()
-    }, [])
-
+    useEffect(()=>{
+        textInput ? setSettings(prevState => ({ ...prevState, search: true })) : setSettings(prevState => ({ ...prevState, search: false }))
+    }, [textInput])
     
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                api.get(`/faculties/listuni`)
-                    .then((result) => {
-                        console.log(result.data);
-                        setUnis(result.data)
-                    })
-                    .catch(err => console.error('api error: ', err));
-
-            } catch (error) {
-                console.error('error: ', error)
-            }
-        }
-
-        getData();
-    }, [])
-
-    
-    
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                api.get(`/faculties/listcities`)
-                    .then((result) => {
-                        console.log(result.data);
-                        setCities(result.data)
-                    })
-                    .catch(err => console.error('api error: ', err));
-
-            } catch (error) {
-                console.error('error: ', error)
-            }
-        }
-
-        getData();
-    }, [])
-
-
     return (
         <div>
-            <h1>Filter: </h1>
-            
-            <input type="checkbox" id="Urgent" name="urgency_level" value="Urgent" onChange={({ target: { value } })=>setUrgency(value)}/>
-            <label for="Urgent">Urgent</label><br/>
-            <input type="checkbox" id="Mildly_urgent" name="urgency_level" value="Mildly urgent" onChange={({ target: { value } })=>setUrgency(value)}/>
-            <label for="Mildly_urgent">Mildly urgent</label><br/>
-            <input type="checkbox" id="Not_urgent" name="urgency_level" value="Not urgent" onChange={({ target: { value } })=>setUrgency(value)}/>
-            <label for="Not_urgent">Not urgent</label><br/>
-
-            <input type="range" id="quantity" min="1" max="100" value="0" onChange={({ target: { value } })=>setQuantity(value)}/>
-            <label for="quantity">{quantity}</label><br/>
-
+            <label htmlFor="filterCheckbox">Filter: </label>
+            <input type="checkbox" id="filterCheckbox" name="filterCheckbox" onChange={() => setSettings(prevState => ({ ...prevState, filter: !prevState.filter }))} checked={settings.filter} />
+            <br />
             {
-                types?.map(type=>  <input type="checkbox" id={type} name="Types" value={type}> <label for="vehicle1">{type}</label><br/></input> )
+                settings.filter ?
+                <Filter/>
+                :
+                <></>
             }
-
-            <h1>Sort: </h1>
-            <h1>Search: </h1>
-            <button> </button>
+            <label htmlFor="sortingCheckbox">Sort: </label>
+            <input type="checkbox" id="sortingCheckbox" name="sortingCheckbox" onChange={() => setSettings(prevState => ({ ...prevState, sorting: !prevState.sorting }))} checked={settings.sorting} />
+            <br />
+            {
+                settings.sorting ?
+                <Sort/>
+                :
+                <></>
+            }
+            <h1>Search for item: </h1>
+            <input type="text" id="searchForItem" placeholder="E.g. bread, meat, ..."
+            onChange={({target: {value: input}}) => setTextInput(input)} value={textInput}/>
+            <br/>
+            <button> Search </button>
         </div>
     )
 }

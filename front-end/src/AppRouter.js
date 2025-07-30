@@ -5,6 +5,7 @@ import FacultiesHome from './components/faculties/FacultiesHome';
 import UniversityPage from './components/faculties/UniversityPage'
 import FacultyPage from './components/faculties/FacultyPage'
 import CreateDonationRequest from './components/create-requests/CreateDonationRequest'
+import Search from './components/donations/Search'
 
 class AppRouter extends Component{
     render(){
@@ -16,6 +17,7 @@ class AppRouter extends Component{
                     <Route path="university/:name" element={<UniversityPage/>}/>
                     <Route path="faculty/:id" element={<FacultyPage/>}/>
                     <Route path="create/:id" element={<CreateDonationRequest/>}/>
+                    <Route path="search" element={<Search/>}/>
                 </Route>
             </Routes>
             </BrowserRouter>

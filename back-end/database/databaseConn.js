@@ -107,7 +107,7 @@ dataPool.deleteFaculty=(id)=>{
 
 dataPool.listFaculties=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT name FROM Faculty`, (err,res)=>{
+    conn.query(`SELECT name, id FROM Faculty`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -116,7 +116,7 @@ dataPool.listFaculties=()=>{
 
 dataPool.listCities=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT city FROM Faculty`, (err,res)=>{
+    conn.query(`SELECT city, ROW_NUMBER() OVER (ORDER BY city) AS 'key' FROM (SELECT DISTINCT city FROM Faculty) distinct_cities`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
