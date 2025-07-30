@@ -5,6 +5,26 @@ const DB=require('../database/databaseConn.js')
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+donationrequests.get('/typelist', urlencodedParser, async (req, res) => {
+       try
+       {
+        let queryResult1=await DB.listDonationTypeENUM();
+        console.log(queryResult1)
+        var data = queryResult1[0].COLUMN_TYPE;
+        console.log(data)
+        data=data.slice(6, data.length-2);
+        console.log(data)
+        var typesArray = data.split(`','`)
+        console.log(typesArray)
+        res.json(typesArray)
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   res.end();
+});
+
 donationrequests.post('/type', urlencodedParser, async (req, res) => {
  var type = req.body.type;
    if (type)
@@ -41,6 +61,45 @@ donationrequests.post('/type', urlencodedParser, async (req, res) => {
    res.end();
 });
 
+donationrequests.get('/subtypelist', urlencodedParser, async (req, res) => {
+       try
+       {
+        let queryResult1=await DB.listDonationSubtypes();
+        console.log(queryResult1)
+        res.json(queryResult1)
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   res.end();
+});
+
+donationrequests.post('/gettype', urlencodedParser, async (req, res) => {
+ var subtype = req.body.subtype;
+   if (subtype)
+   {
+       try
+       {
+        let queryResult=await DB.getDonationType(subtype);
+            res.json(queryResult);
+            console.log(queryResult)
+
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field/s missing")
+       res.status(204)
+   }
+   res.end();
+});
+
+
 donationrequests.post('/subtype', urlencodedParser, async (req, res) => {
  var type = req.body.type;
  var subtype = req.body.subtype;
@@ -71,36 +130,73 @@ donationrequests.post('/subtype', urlencodedParser, async (req, res) => {
 });
 
 donationrequests.post('/create', urlencodedParser, async (req, res) => {
- var quantity = req.body.quantity;
- var urgency_level = req.body.urgency_level;
- var item = req.body.item;
- var faculty_id = req.body.faculty_id;
+    var quantity = req.body.quantity;
+    var urgency_level = req.body.urgency_level;
+    var item = req.body.item;
+    var type = req.body.type;
+    var faculty_id = req.body.faculty_id;
 
- var isCompleteRequest= quantity&&urgency_level&&item&&faculty_id
-   if (isCompleteRequest)
-   {
-       try
-       {
-        let queryResult=await DB.createDonationRequest(quantity, urgency_level, item, faculty_id);
-               if (queryResult.affectedRows) {
-               console.log("New donation request added!!")
-               res.json({
-                "success": true,
-                "message": "New donation request added!!"
-               })
-             }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+    var isCompleteRequest = quantity && urgency_level && item && faculty_id && type
+    if (isCompleteRequest) {
+        let subtypes = await DB.listDonationSubtypes();
+        var isASubtype = false;
+        subtypes.map(subtype => { if (subtype.subtype == item) { isASubtype = true } })
+        if (!isASubtype) {
+            let types = await DB.listDonationTypeENUM();
+            console.log(types)
+            var data = types[0].COLUMN_TYPE;
+            console.log(data)
+            data = data.slice(6, data.length - 2);
+            console.log(data)
+            var typesArray = data.split(`','`)
+            var isAType = typesArray.include(type);
+            if (!isAType) {
+                data = types[0].COLUMN_TYPE
+                data = data.slice(5, data.length - 1)
+                var newsql = `ALTER TABLE Type_of_donation MODIFY type ENUM(` + data + `,'` + type + `')`
+                try {
+                    let queryResult = await DB.runSQL(newsql)
+                    if (queryResult.affectedRows) {
+                        console.log("New donation type added!!")
+                    }
+                }
+                catch (err) {
+                    console.log(err)
+                    res.status(500)
+                }
+            }
+            try {
+                let queryResult = await DB.createDonationSubtype(item, type);
+                if (queryResult.affectedRows) {
+                    console.log("New donation subtype added!!")
+                }
+            }
+            catch (err) {
+                console.log(err)
+                res.status(500)
+            }
+        }
+
+        try {
+            let queryResult = await DB.createDonationRequest(quantity, urgency_level, item, faculty_id);
+            if (queryResult.affectedRows) {
+                console.log("New donation request added!!")
+                res.json({
+                    "success": true,
+                    "message": "New donation request added!"
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.post('/update', urlencodedParser, async (req, res) => {
@@ -125,7 +221,7 @@ donationrequests.post('/update', urlencodedParser, async (req, res) => {
                 res.status(500)
             }
         }
-        else if (field == 'id' || field == 'faculty_id' || field=='date' || field=='item') {
+        else if (field == 'id' || field == 'faculty_id' || field == 'date' || field == 'item') {
             console.log("You can't update these fields.")
         }
         else {
@@ -136,7 +232,7 @@ donationrequests.post('/update', urlencodedParser, async (req, res) => {
         console.log("A field is empty!!")
     }
     res.end()
- });
+});
 
 donationrequests.post('/delete', urlencodedParser, async (req, res) => {
  var id = req.body.id;
@@ -165,5 +261,9 @@ donationrequests.post('/delete', urlencodedParser, async (req, res) => {
    }
    res.end();
 });
+
+donationrequests.post('/search', urlencodedParser, async (req,res)=>{
+    
+})
 
 module.exports=donationrequests

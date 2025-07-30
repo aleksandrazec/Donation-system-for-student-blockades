@@ -158,6 +158,25 @@ dataPool.listDonationTypeENUM=()=>{
   })
 }
 
+dataPool.listDonationSubtypes=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT subtype FROM Type_of_donation', (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.getDonationType=(subtype)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT type FROM Type_of_donation WHERE subtype = ?',subtype, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+
 dataPool.createDonationSubtype=(subtype, type)=>{
   return new Promise((resolve, reject)=>{
     conn.query('INSERT INTO Type_of_donation (subtype, type) VALUES (?,?)', [subtype, type], (err,res)=>{
