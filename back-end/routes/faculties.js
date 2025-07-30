@@ -223,8 +223,30 @@ faculties.post('/removefac', urlencodedParser, async (req, res) => {
    res.end();
 });
 
+faculties.get('/listfac', urlencodedParser, async (req, res) => {
+    try{
+        let queryResult=await DB.listFaculties();
+               if(queryResult.length>0)
+               {
+                    console.log(queryResult)
+                    console.log("OK");
+                    res.json(queryResult);      
+                    res.status(200)
+               }else
+               {
+                  console.log("no facs?");
+                  res.status(204)  
+               }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   res.end();
+});
+
+
 faculties.get('/listuni', urlencodedParser, async (req, res) => {
-console.log("in function")
     try{
         let queryResult=await DB.listUniversities();
                if(queryResult.length>0)
@@ -236,6 +258,28 @@ console.log("in function")
                }else
                {
                   console.log("no unis?");
+                  res.status(204)  
+               }
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   res.end();
+});
+
+faculties.get('/listcities', urlencodedParser, async (req, res) => {
+    try{
+        let queryResult=await DB.listCities();
+               if(queryResult.length>0)
+               {
+                    console.log(queryResult)
+                    console.log("OK");
+                    res.json(queryResult);      
+                    res.status(200)
+               }else
+               {
+                  console.log("no cities?");
                   res.status(204)  
                }
        }

@@ -149,7 +149,7 @@ donationrequests.post('/create', urlencodedParser, async (req, res) => {
             data = data.slice(6, data.length - 2);
             console.log(data)
             var typesArray = data.split(`','`)
-            var isAType = typesArray.include(type);
+            var isAType = typesArray.includes(type);
             if (!isAType) {
                 data = types[0].COLUMN_TYPE
                 data = data.slice(5, data.length - 1)

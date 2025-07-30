@@ -105,9 +105,18 @@ dataPool.deleteFaculty=(id)=>{
   })
 }
 
-dataPool.addUniversity=(university)=>{
+dataPool.listFaculties=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`ALTER TYPE university ADD VALUE ?`, university, (err, res)=>{
+    conn.query(`SELECT name FROM Faculty`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listCities=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT city FROM Faculty`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })

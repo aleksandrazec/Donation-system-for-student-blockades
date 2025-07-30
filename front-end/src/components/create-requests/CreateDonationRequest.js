@@ -5,7 +5,7 @@ import {useParams} from 'react-router';
 function CreateDonationRequest(props){
     const [state, setState] = useState({
         quantity: 0,
-        urgency_level: '',
+        urgency_level: 'Urgent',
         item: '',
         type: '',
         faculty_id: 0,
@@ -118,7 +118,7 @@ function CreateDonationRequest(props){
                     urgency_levels.map(level=> <option value={level} key={level}>{level}</option>)
                 }
             </select>
-            <br></br>
+            <br/>
             <button onClick={()=> addDonationRequest()}>Create Donation request</button>
         </div>
     )
