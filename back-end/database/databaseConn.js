@@ -114,18 +114,27 @@ dataPool.listFaculties=()=>{
   })
 }
 
-dataPool.listCities=()=>{
+dataPool.listFacultiesForSearch=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT city, ROW_NUMBER() OVER (ORDER BY city) AS 'key' FROM (SELECT DISTINCT city FROM Faculty) distinct_cities`, (err,res)=>{
+    conn.query(`SELECT name, ROW_NUMBER() OVER (ORDER BY name) AS 'key' FROM Faculty`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
   })
 }
 
-dataPool.listUniversities=()=>{
+dataPool.listCitiesForSearch=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT university, ROW_NUMBER() OVER (ORDER BY university) AS 'key' FROM (SELECT DISTINCT university FROM Faculty) distinct_unis`
+    conn.query(`SELECT city AS name, ROW_NUMBER() OVER (ORDER BY city) AS 'key' FROM (SELECT DISTINCT city FROM Faculty) distinct_cities`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listUniversitiesForSearch=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT university AS name, ROW_NUMBER() OVER (ORDER BY university) AS 'key' FROM (SELECT DISTINCT university FROM Faculty) distinct_unis`
       , (err, res)=>{
       if(err){return reject(err)}
       return resolve(res)
@@ -175,7 +184,14 @@ dataPool.listDonationSubtypes=()=>{
     })
   })
 }
-
+dataPool.listDonationSubtypesForSearch=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT subtype AS name, ROW_NUMBER() OVER (ORDER BY subtype) AS 'key' FROM Type_of_donation`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
 dataPool.getDonationType=(subtype)=>{
   return new Promise((resolve, reject)=>{
     conn.query('SELECT type FROM Type_of_donation WHERE subtype = ?',subtype, (err,res)=>{

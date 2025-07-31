@@ -262,8 +262,5 @@ donationrequests.post('/delete', urlencodedParser, async (req, res) => {
    res.end();
 });
 
-donationrequests.post('/search', urlencodedParser, async (req,res)=>{
-    
-})
 
 module.exports=donationrequests

@@ -5,6 +5,7 @@ const users= require("./routes/users.js")
 const faculties = require("./routes/faculties.js")
 const donationrequests = require("./routes/donationrequests.js")
 const forums = require("./routes/forums.js")
+const search = require("./routes/search.js")
 const app = express()
 const cors = require('cors')
 
@@ -28,6 +29,7 @@ app.use('/users', users);
 app.use('/faculties', faculties)
 app.use('/donationrequests', donationrequests)
 app.use('/forums', forums)
+app.use('/search', search)
 
 app.listen(process.env.PORT || port, ()=>{
 console.log(`Server is running on port: ${process.env.PORT || port}`)

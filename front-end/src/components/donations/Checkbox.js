@@ -4,7 +4,7 @@ function Checkbox(props){
     }=props
     return(
         <div>
-            <input type="checkbox" id={item} name="Types" value={item}/>
+            <input type="checkbox" id={item} value={item}/>
             <label htmlFor={item}>{item}</label>
             <br/>
         </div>

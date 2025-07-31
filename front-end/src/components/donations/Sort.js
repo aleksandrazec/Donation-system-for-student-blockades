@@ -2,21 +2,34 @@ import { useState, useEffect } from 'react';
 
 function Sort(props) {
 
+    const{
+        sortedByCallback,
+        quantityCallback,
+        urgencyLevelCallback,
+        dateCallback
+    }=props;
     const [sortedBy, setSortedBy] = useState({
         byQuantity: false,
         byUrgencyLevel: false,
         byDate: false,
     })
-    const [quantity, setQuantity] = useState(true)
-    const [urgencyLevel, setUrgencyLevel] = useState(true)
-    const [date, setDate] = useState(true)
-
     useEffect(() => {
-        console.log(sortedBy)
+        sortedByCallback({byQuantity: sortedBy.byQuantity, byUrgencyLevel: sortedBy.byUrgencyLevel, byDate: sortedBy.byDate})
     }, [sortedBy])
-    useEffect(() => {
-        console.log(quantity)
-    }, [quantity])
+
+    const [quantity, setQuantity] = useState(true)
+    useEffect(()=>{
+        quantityCallback({quantity})
+    },[quantity])
+    const [urgencyLevel, setUrgencyLevel] = useState(true)
+    useEffect(()=>{
+        urgencyLevelCallback({urgencyLevel})
+    },[urgencyLevel])
+    const [date, setDate] = useState(true)
+    useEffect(()=>{
+        dateCallback({date})
+    },[date])
+
     return (
         <div>
             <div>
