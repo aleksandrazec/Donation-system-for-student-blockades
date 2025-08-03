@@ -238,6 +238,33 @@ dataPool.deleteDonationRequest=(id)=>{
   })
 }
 
+dataPool.listForumsASC=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY date ASC`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listForumsDSC=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY date DESC`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.findForum=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE Forum.id= ?`, [id], (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.createForum=(prompt, facultyID)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`INSERT INTO Forum (prompt, faculty_id) VALUES (?,?)`, [prompt, facultyID], (err,res)=>{
@@ -255,6 +282,25 @@ dataPool.deleteForum=(id)=>{
     })
   })
 }
+
+dataPool.getComments=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT Comment.id , text, date, reply_id, first_name, last_name, user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id WHERE reply_id IS NULL AND forum_id = ? ORDER BY date DESC`, id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.getReplies=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT Comment.id , text, date, reply_id, first_name, last_name, user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id WHERE reply_id = ? ORDER BY date DESC`, id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.createComment=(text, userID, forumID)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`INSERT INTO Comment (text, user_id, forum_id) VALUES (?,?,?)`, [text, userID, forumID], (err,res)=>{

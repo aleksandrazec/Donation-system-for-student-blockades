@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import Table from './Table'
 import Filter from './Filter'
@@ -125,10 +125,10 @@ function Search(props) {
             <br />
             <button onClick={() => searchButton()}> Search </button>
             {
-                searchResult ?
+                searchResult!=='' ?
                     <Table data={searchResult} />
                     :
-                    <></>
+                    <p>No results for your search criteria.</p>
             }
         </div>
     )

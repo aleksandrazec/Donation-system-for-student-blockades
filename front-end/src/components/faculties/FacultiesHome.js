@@ -28,7 +28,7 @@ function FacultiesHome(props){
             <p>faculties home</p>
             {
                 unis ?
-                unis.map(uni => <UniversityCard name={uni.university} key={uni.key}/>)
+                unis.map(uni => <UniversityCard name={uni.name} key={uni.key}/>)
                 :
                 <p></p>
             }

@@ -26,11 +26,11 @@ function TabContainer({children}){
             },
             {
                 text: 'Forums',
-                url: '/',
+                url: '/forums',
             },
             {
                 text: 'Donate',
-                url: '/',
+                url: '/search',
             },
             {
                 text: 'Profile',

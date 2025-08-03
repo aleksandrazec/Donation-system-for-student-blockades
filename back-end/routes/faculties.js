@@ -248,7 +248,7 @@ faculties.get('/listfac', urlencodedParser, async (req, res) => {
 
 faculties.get('/listuni', urlencodedParser, async (req, res) => {
     try{
-        let queryResult=await DB.listUniversities();
+        let queryResult=await DB.listUniversitiesForSearch();
                if(queryResult.length>0)
                {
                     console.log(queryResult)
