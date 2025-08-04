@@ -1,17 +1,20 @@
 import './App.css';
-import React from 'react';
 import TabContainer from './components/tab-navigator/TabContainer';
-import {Outlet} from 'react-router';
+import { Outlet } from 'react-router';
+import {useState} from 'react';
 
-class App extends React.Component{
+function App(props) {
 
-  render(){
-    return(
+  const [role, setRole]=useState();
+
+  return (
+    <div>
+      {
         <TabContainer>
-        <h1>Search through donations</h1>
-        <Outlet/>
-       </TabContainer>
-    );
-  }
+          <Outlet />
+        </TabContainer>
+      }
+    </div>
+  )
 }
 export default App;

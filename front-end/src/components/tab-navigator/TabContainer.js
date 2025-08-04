@@ -21,8 +21,12 @@ function TabContainer({children}){
     const getTabs = () => {
         return [
             {
+                text: 'Home',
+                url: '/f',
+            },
+            {
                 text: 'Faculties',
-                url: '/',
+                url: '/faculties',
             },
             {
                 text: 'Forums',

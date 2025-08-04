@@ -8,22 +8,28 @@ import CreateDonationRequest from './components/create-requests/CreateDonationRe
 import Search from './components/donations/Search'
 import ForumsHome from './components/forums/ForumsHome'
 import ForumPage from './components/forums/ForumPage'
+import LogIn from './components/profile/LogIn'
+import Register from './components/profile/Register'
+import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
 
-class AppRouter extends Component{
-    render(){
-        return(
+class AppRouter extends Component {
+    render() {
+        return (
             <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<App/>}>
-                    <Route index={true} element={<FacultiesHome/>}/>
-                    <Route path="university/:name" element={<UniversityPage/>}/>
-                    <Route path="faculty/:id" element={<FacultyPage/>}/>
-                    <Route path="create/:id" element={<CreateDonationRequest/>}/>
-                    <Route path="search" element={<Search/>}/>
-                    <Route path="forums" element={<ForumsHome/>}/>
-                    <Route path="forums/:id" element={<ForumPage/>}/>
-                </Route>
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<App />}>
+                        <Route path="login" element={<LogIn />} />
+                        <Route path="register" element={<Register />} />
+                        <Route path="registersuccess" element={<RegisterSuccessPage />} />
+                        <Route path="faculties" element={<FacultiesHome />} />
+                        <Route path="university/:name" element={<UniversityPage />} />
+                        <Route path="faculty/:id" element={<FacultyPage />} />
+                        <Route path="create/:id" element={<CreateDonationRequest />} />
+                        <Route path="search" element={<Search />} />
+                        <Route path="forums" element={<ForumsHome />} />
+                        <Route path="forums/:id" element={<ForumPage />} />
+                    </Route>
+                </Routes>
             </BrowserRouter>
         )
     }

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 import ForumCard from './ForumCard'
 import api from '../../services/api'
-import { useNavigate } from 'react-router'
 
 function ForumsHome(props) {
-    const navigate = useNavigate()
     const [forums, setForums] = useState()
 
     useEffect(() => {
