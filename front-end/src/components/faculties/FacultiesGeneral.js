@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router"
+import { UserContext } from '../../Context'
 
-function facultiesGeneral(props){
+function FacultiesGeneral(props){
     const user=useContext(UserContext)
     const navigate = useNavigate()
     useEffect(()=>{
@@ -12,11 +13,11 @@ function facultiesGeneral(props){
                 console.error(error)
             }
         }
-    }, user)
+    }, [user, navigate])
     return(
         <div>
             congrats ur a {user.role}
         </div>
     )
 }
-export default facultiesGeneral
+export default FacultiesGeneral
