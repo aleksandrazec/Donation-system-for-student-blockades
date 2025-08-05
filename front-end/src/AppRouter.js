@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import App from './App';
 import FacultiesHome from './components/faculties/FacultiesHome';
+import FacultiesGeneral from './components/faculties/FacultiesGeneral';
 import UniversityPage from './components/faculties/UniversityPage'
 import FacultyPage from './components/faculties/FacultyPage'
 import CreateDonationRequest from './components/create-requests/CreateDonationRequest'
@@ -15,13 +16,14 @@ import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
 class AppRouter extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter forceRefresh={true}>
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route path="login" element={<LogIn />} />
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />
                         <Route path="faculties" element={<FacultiesHome />} />
+                        <Route path="facultiesgen" element={<FacultiesGeneral />} />
                         <Route path="university/:name" element={<UniversityPage />} />
                         <Route path="faculty/:id" element={<FacultyPage />} />
                         <Route path="create/:id" element={<CreateDonationRequest />} />

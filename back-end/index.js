@@ -1,6 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const DB = require('./database/databaseConn.js')
+const session = require('express-session')
 const users= require("./routes/users.js")
 const faculties = require("./routes/faculties.js")
 const donationrequests = require("./routes/donationrequests.js")
@@ -18,6 +19,14 @@ res.send("hola")
 app.use(express.json());
 
 app.use(express.urlencoded({extended : true}));
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+   secret: 'some secret',
+   resave: true,
+   saveUninitialized: true,
+   cookie: { secure: false }
+  }))
 
 app.use(cors({
     origin: `http://88.200.63.148:3334`,

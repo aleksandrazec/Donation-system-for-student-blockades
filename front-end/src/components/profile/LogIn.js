@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import api from '../../services/api'
 import { useNavigate } from 'react-router'
-import { useOutletContext } from "react-router-dom";
 
 function LogIn(props) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [user, setUser]=useState({})
     const navigate = useNavigate()
     const goToRegister=async()=>{
         try {
@@ -20,13 +18,14 @@ function LogIn(props) {
         try {
             api.post(`/users/login`, { email: email, password: password})
                 .then(result => {
-                    setUser(result.data)                    
+                    navigate(`/`)
                 })
                 .catch(err => console.error(err))
         } catch (error) {
             console.error(error)
         }
     }
+
 
     return (
         <div>

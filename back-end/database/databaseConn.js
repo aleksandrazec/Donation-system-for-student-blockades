@@ -57,7 +57,14 @@ dataPool.setRole=(id, role)=>{
     })
   })
 }
-
+dataPool.getRole=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT role FROM User WHERE id = ? `, id, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
 
 
 dataPool.addFaculty=(name, city, address, coordinates, workingHours, university)=>{

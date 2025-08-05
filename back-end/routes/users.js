@@ -21,6 +21,11 @@ users.post('/login', urlencodedParser, async (req, res) => {
                     console.log(queryResult)
                     console.log("LOGIN OK");
                     res.status(200)
+                    req.session.logged_in = true;
+                    req.session.user_id=queryResult[0].id;
+                    req.session.role=queryResult[0].role
+                    console.log(req.session)
+
                    }
                    else
                    {
@@ -45,6 +50,34 @@ users.post('/login', urlencodedParser, async (req, res) => {
    }
    res.end();
 });
+
+ users.get('/session', async (req, res, next)=>{
+    try{
+        console.log("session data: ")
+        console.log(req.session)
+        res.json(req.session);
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+        next()
+    }
+ })
+
+ users.get('/logout', async (req,res, next)=>{
+    try{
+        req.session.destroy(function(err) {
+            res.json({status:{success: true, msg: err}})
+        })
+       
+    }
+    catch(err){
+        console.log(err)
+        res.json({status:{success: false, msg: err}})
+        res.sendStatus(500)
+        next()
+    }
+ })
 
 users.post('/register', urlencodedParser, async (req, res) => {
  
@@ -111,6 +144,30 @@ users.post('/update', urlencodedParser, async (req, res) => {
             console.log("Invalid field")
         }
     }
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
+ });
+
+users.post('/getrole', urlencodedParser, async (req, res) => {
+
+    var id = req.body.id;
+
+    if (id) {
+
+            try {
+                var queryResult = await DB.getRole(id)
+                
+                    console.log(queryResult[0])
+                    res.json(queryResult[0])
+                
+            }
+            catch (err) {
+                console.log(err)
+                res.status(500)
+            }
+    }  
     else {
         console.log("A field is empty!!")
     }

@@ -22,11 +22,11 @@ function TabContainer({children}){
         return [
             {
                 text: 'Home',
-                url: '/f',
+                url: '/',
             },
             {
                 text: 'Faculties',
-                url: '/faculties',
+                url: '/facultiesgen',
             },
             {
                 text: 'Forums',
@@ -38,7 +38,7 @@ function TabContainer({children}){
             },
             {
                 text: 'Profile',
-                url: '/',
+                url: '/login',
             },
         ]
     }
