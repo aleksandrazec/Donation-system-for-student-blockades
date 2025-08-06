@@ -173,7 +173,29 @@ users.post('/getrole', urlencodedParser, async (req, res) => {
     }
     res.end()
  });
+users.post('/getfac', urlencodedParser, async (req, res) => {
 
+    var id = req.body.id;
+
+    if (id) {
+
+            try {
+                var queryResult = await DB.getFaculty(id)
+                
+                    console.log(queryResult[0])
+                    res.json(queryResult[0])
+                
+            }
+            catch (err) {
+                console.log(err)
+                res.status(500)
+            }
+    }  
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
+ });
 users.post('/setrole', urlencodedParser, async (req, res) => {
 
     var id = req.body.id;

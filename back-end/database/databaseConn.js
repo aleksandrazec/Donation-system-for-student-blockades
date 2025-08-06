@@ -65,7 +65,14 @@ dataPool.getRole=(id)=>{
     })
   })
 }
-
+dataPool.getFaculty=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT name, city, address, coordinates, working_hours, university, id FROM Faculty WHERE user_id = ? `, id, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
 
 dataPool.addFaculty=(name, city, address, coordinates, workingHours, university)=>{
   return new Promise((resolve, reject)=>{
@@ -239,6 +246,23 @@ dataPool.updateDonationRequest=(id, field, info)=>{
 dataPool.deleteDonationRequest=(id)=>{
   return new Promise((resolve, reject)=>{
     conn.query('DELETE FROM Donation_request WHERE id = ?', id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listDonationRequestFac=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT * FROM Donation_request WHERE faculty_id = ?', id, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+dataPool.getDonationRequest=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT * FROM Donation_request WHERE id = ?', id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })

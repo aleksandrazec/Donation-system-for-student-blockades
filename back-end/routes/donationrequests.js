@@ -99,6 +99,53 @@ donationrequests.post('/gettype', urlencodedParser, async (req, res) => {
    res.end();
 });
 
+donationrequests.post('/listforfac', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.listDonationRequestFac(id);
+            res.json(queryResult);
+            console.log(queryResult)
+
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field/s missing")
+       res.status(204)
+   }
+   res.end();
+});
+
+donationrequests.post('/getreq', urlencodedParser, async (req, res) => {
+ var id = req.body.id;
+   if (id)
+   {
+       try
+       {
+        let queryResult=await DB.getDonationRequest(id);
+            res.json(queryResult[0]);
+            console.log(queryResult[0])
+
+       }
+       catch(err){
+           console.log(err)
+           res.status(500)
+       }   
+   }
+   else
+   {
+       console.log("Field/s missing")
+       res.status(204)
+   }
+   res.end();
+});
 
 donationrequests.post('/subtype', urlencodedParser, async (req, res) => {
  var type = req.body.type;

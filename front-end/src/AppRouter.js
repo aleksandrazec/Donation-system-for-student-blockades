@@ -12,6 +12,8 @@ import ForumPage from './components/forums/ForumPage'
 import LogIn from './components/profile/LogIn'
 import Register from './components/profile/Register'
 import RegisterSuccessPage from './components/profile/RegisterSuccessPage'
+import EditDonationRequests from './components/donations/EditDonationRequests'
+import EditPage from './components/donations/EditPage'
 
 class AppRouter extends Component {
     render() {
@@ -30,6 +32,8 @@ class AppRouter extends Component {
                         <Route path="search" element={<Search />} />
                         <Route path="forums" element={<ForumsHome />} />
                         <Route path="forums/:id" element={<ForumPage />} />
+                        <Route path="edit/:id" element={<EditDonationRequests />} />
+                        <Route path="editpg/:id" element={<EditPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
