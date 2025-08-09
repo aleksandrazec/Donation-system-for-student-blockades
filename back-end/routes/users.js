@@ -1,118 +1,114 @@
-const express= require("express")
+const express = require("express")
 const users = express.Router();
-const DB=require('../database/databaseConn.js')
+const DB = require('../database/databaseConn.js')
 
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 users.post('/login', urlencodedParser, async (req, res) => {
- 
- var email = req.body.email;
- var password = req.body.password;
-   if (email && password)
-   {
-       try
-       {
-        let queryResult=await DB.authUser(email);
-               if(queryResult.length>0)
-               {
-                   if(password===queryResult[0].password)
-                   {
+
+    var email = req.body.email;
+    var password = req.body.password;
+    if (email && password) {
+        try {
+            let queryResult = await DB.authUser(email);
+            if (queryResult.length > 0) {
+                if (password === queryResult[0].password) {
                     console.log(queryResult)
                     console.log("LOGIN OK");
                     res.status(200)
                     req.session.logged_in = true;
-                    req.session.user_id=queryResult[0].id;
-                    req.session.role=queryResult[0].role
+                    req.session.user_id = queryResult[0].id;
+                    req.session.role = queryResult[0].role
                     console.log(req.session)
-
-                   }
-                   else
-                   {
-                      console.log("INCORRECT PASSWORD");
-                      res.status(204)
-                   }
-               }else
-               {
-                  console.log("USER NOT REGISTRED");
-                  res.status(204)  
-               }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Please enter Username and Password!")
-       res.status(204)
-   }
-   res.end();
+                    res.json({
+                        role: req.session.role,
+                        user_id: req.session.user_id
+                    })
+                }
+                else {
+                    console.log("INCORRECT PASSWORD");
+                    res.status(204)
+                }
+            } else {
+                console.log("USER NOT REGISTRED");
+                res.status(204)
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Please enter Username and Password!")
+        res.status(204)
+    }
+    res.end();
 });
 
- users.get('/session', async (req, res, next)=>{
-    try{
+users.get('/session', async (req, res, next) => {
+    try {
         console.log("session data: ")
         console.log(req.session)
         res.json(req.session);
     }
-    catch(err){
+    catch (err) {
         console.log(err)
         res.sendStatus(500)
         next()
     }
- })
+})
 
- users.get('/logout', async (req,res, next)=>{
-    try{
-        req.session.destroy(function(err) {
-            res.json({status:{success: true, msg: err}})
-        })
-       
+users.get('/logout', async (req, res, next) => {
+    try {
+        req.session.logged_in = false;
+        req.session.user_id =0;
+        req.session.role ='Guest'
+        console.log(req.session)
+        res.json(req.session)
+
     }
-    catch(err){
+    catch (err) {
         console.log(err)
-        res.json({status:{success: false, msg: err}})
+        res.json({ status: { success: false, msg: err } })
         res.sendStatus(500)
         next()
     }
- })
+})
 
 users.post('/register', urlencodedParser, async (req, res) => {
- 
-    var email= req.body.email;
+
+    var email = req.body.email;
     var password = req.body.password;
     var first_name = req.body.first_name;
     var last_name = req.body.last_name;
     var city = req.body.city;
 
-    var isAcompleteUser=email && password && first_name && last_name && city
-   if (isAcompleteUser)
-   {
-       try{
-           var queryResult=await DB.createUser(email, password, first_name, last_name, city)
-           if (queryResult.affectedRows) {
-               console.log("New user registered!!")
-               res.json({
-                "success": true,
-                "message": "New user registered."
-               })
-             }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   } 
-   else
-   {
-    console.log("A field is empty!!")
-   }
-   res.end()
+    var isAcompleteUser = email && password && first_name && last_name && city
+    if (isAcompleteUser) {
+        try {
+            var queryResult = await DB.createUser(email, password, first_name, last_name, city)
+            if (queryResult.affectedRows) {
+                console.log("New user registered!!")
+                res.json({
+                    "success": true,
+                    "message": "New user registered."
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
 
 
- });
+});
 
 users.post('/update', urlencodedParser, async (req, res) => {
 
@@ -148,7 +144,7 @@ users.post('/update', urlencodedParser, async (req, res) => {
         console.log("A field is empty!!")
     }
     res.end()
- });
+});
 
 users.post('/getrole', urlencodedParser, async (req, res) => {
 
@@ -156,54 +152,78 @@ users.post('/getrole', urlencodedParser, async (req, res) => {
 
     if (id) {
 
-            try {
-                var queryResult = await DB.getRole(id)
-                
-                    console.log(queryResult[0])
-                    res.json(queryResult[0])
-                
-            }
-            catch (err) {
-                console.log(err)
-                res.status(500)
-            }
-    }  
+        try {
+            var queryResult = await DB.getRole(id)
+
+            console.log(queryResult[0])
+            res.json(queryResult[0])
+
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
     else {
         console.log("A field is empty!!")
     }
     res.end()
- });
+});
+
+users.post('/delete', urlencodedParser, async (req, res) => {
+
+    var id = req.body.id;
+
+    if (id) {
+
+        try {
+            var queryResult = await DB.deleteUser(id)
+            console.log(queryResult[0])
+            res.json('Deleted')
+
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
+});
+
 users.post('/getfac', urlencodedParser, async (req, res) => {
 
     var id = req.body.id;
 
     if (id) {
 
-            try {
-                var queryResult = await DB.getFaculty(id)
-                
-                    console.log(queryResult[0])
-                    res.json(queryResult[0])
-                
-            }
-            catch (err) {
-                console.log(err)
-                res.status(500)
-            }
-    }  
+        try {
+            var queryResult = await DB.getFaculty(id)
+
+            console.log(queryResult[0])
+            res.json(queryResult[0])
+
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
     else {
         console.log("A field is empty!!")
     }
     res.end()
- });
+});
 users.post('/setrole', urlencodedParser, async (req, res) => {
 
     var id = req.body.id;
-    var role= req.body.role;
+    var role = req.body.role;
 
-    var isCompleteRequest= id&&role
+    var isCompleteRequest = id && role
     if (isCompleteRequest) {
-        if(role=='Citizen' || role=='Student' || role=='Admin'){
+        if (role == 'Citizen' || role == 'Student' || role == 'Admin') {
             try {
                 var queryResult = await DB.setRole(id, role)
                 if (queryResult.affectedRows) {
@@ -217,7 +237,7 @@ users.post('/setrole', urlencodedParser, async (req, res) => {
                 console.log(err)
                 res.status(500)
             }
-        }else{
+        } else {
             console.log(`Not a valid role`)
         }
     }
@@ -225,8 +245,30 @@ users.post('/setrole', urlencodedParser, async (req, res) => {
         console.log("Field is empty!!")
     }
     res.end()
- });
+});
 
+users.post('/getinfo', urlencodedParser, async (req, res) => {
 
- 
-module.exports=users
+    var id = req.body.id;
+
+    if (id) {
+
+        try {
+            var queryResult = await DB.getInfo(id)
+
+            console.log(queryResult[0])
+            res.json(queryResult[0])
+
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("A field is empty!!")
+    }
+    res.end()
+});
+
+module.exports = users

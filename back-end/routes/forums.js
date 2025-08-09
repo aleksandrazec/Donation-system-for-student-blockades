@@ -179,6 +179,28 @@ forums.post('/getcomments', urlencodedParser, async (req, res) => {
     }
     res.end();
 });
+
+forums.post('/listallfac', urlencodedParser, async (req, res) => {
+    var id = req.body.id;
+
+    if (id) {
+        try {
+            let queryResult = await DB.listForumsByFac(id);
+                console.log(queryResult)
+                res.json(queryResult)
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field is missing!")
+        res.status(204)
+    }
+    res.end();
+});
+
 forums.post('/getreplies', urlencodedParser, async (req, res) => {
     var id = req.body.id;
 

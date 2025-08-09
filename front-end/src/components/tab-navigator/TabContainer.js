@@ -25,7 +25,7 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Profile',
-                    url: '/login',
+                    url: '/profile',
                 },
             ]
         }else if(user.role==='Citizen'){
@@ -48,7 +48,7 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Profile',
-                    url: '/login',
+                    url: '/profile',
                 },
             ]
         }else{

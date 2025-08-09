@@ -8,7 +8,7 @@ function ForumsHome(props) {
     useEffect(() => {
         const getForums = () => {
             try {
-                api.post(`/forums/listall`, 'ASC')
+                api.post(`/forums/listall`, {order:'DSC'})
                     .then(result => {
                         console.log(result.data)
                         setForums(result.data)

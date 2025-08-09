@@ -1,6 +1,5 @@
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../../services/api';
-import Checkbox from './Checkbox'
 
 function Filter(props) {
 
@@ -21,9 +20,9 @@ function Filter(props) {
         console.log(faculties)
         console.log(updatedState)
     }
-    useEffect(()=>{
-        props.facultiesCallback({faculties, facultiesState})
-    },[faculties,facultiesState])
+    useEffect(() => {
+        props.facultiesCallback({ faculties, facultiesState })
+    }, [faculties, facultiesState])
 
 
     const [items, setItems] = useState('')
@@ -36,9 +35,9 @@ function Filter(props) {
         console.log(items)
         console.log(updatedState)
     }
-    useEffect(()=>{
-        props.itemsCallback({items, itemsState})
-    },[items,itemsState])
+    useEffect(() => {
+        props.itemsCallback({ items, itemsState })
+    }, [items, itemsState])
 
     const [types, setTypes] = useState('')
     const [typesState, setTypesState] = useState([])
@@ -50,9 +49,9 @@ function Filter(props) {
         console.log(types)
         console.log(updatedState)
     }
-    useEffect(()=>{
-        props.typesCallback({types, typesState})
-    },[types,typesState])
+    useEffect(() => {
+        props.typesCallback({ types, typesState })
+    }, [types, typesState])
 
     const [unis, setUnis] = useState('')
     const [unisState, setUnisState] = useState([])
@@ -64,9 +63,9 @@ function Filter(props) {
         console.log(unis)
         console.log(updatedState)
     }
-    useEffect(()=>{
-        props.unisCallback({unis, unisState})
-    },[unis,unisState])
+    useEffect(() => {
+        props.unisCallback({ unis, unisState })
+    }, [unis, unisState])
 
 
     const [cities, setCities] = useState('')
@@ -79,9 +78,9 @@ function Filter(props) {
         console.log(cities)
         console.log(updatedState)
     }
-    useEffect(()=>{
-        props.citiesCallback({cities, citiesState})
-    },[cities,citiesState])
+    useEffect(() => {
+        props.citiesCallback({ cities, citiesState })
+    }, [cities, citiesState])
 
 
     useEffect(() => {
@@ -154,15 +153,15 @@ function Filter(props) {
         getTypes()
     }, [])
 
-   
+
     useEffect(() => {
         console.log(filteredBy)
     }, [filteredBy])
 
     return (
         <div>
-            <label htmlFor="typesCheckbox">Types: </label>
             <input type="checkbox" id="typesCheckbox" name="typesCheckbox" onChange={() => setFilteredBy(prevState => ({ ...prevState, typesOn: !prevState.typesOn }))} checked={filteredBy.typesOn} />
+            <label htmlFor="typesCheckbox">Types: </label>
             <br />
             {
                 types && filteredBy.typesOn ?
@@ -178,8 +177,8 @@ function Filter(props) {
                     :
                     <></>
             }
-            <label htmlFor="itemsCheckbox">Items: </label>
             <input type="checkbox" id="itemsCheckbox" name="itemsCheckbox" onChange={() => setFilteredBy(prevState => ({ ...prevState, itemsOn: !prevState.itemsOn }))} checked={filteredBy.itemsOn} />
+            <label htmlFor="itemsCheckbox">Items: </label>
             <br />
             {
                 items && filteredBy.itemsOn ?
@@ -192,13 +191,12 @@ function Filter(props) {
                             </div>
                         )
                     })
-                    
+
                     :
                     <></>
             }
-
-            <label htmlFor="facultiesCheckbox">Faculties: </label>
             <input type="checkbox" id="facultiesCheckbox" name="facultiesCheckbox" onChange={() => setFilteredBy(prevState => ({ ...prevState, facultiesOn: !prevState.facultiesOn }))} checked={filteredBy.facultiesOn} />
+            <label htmlFor="facultiesCheckbox">Faculties: </label>
             <br />
             {
                 faculties && filteredBy.facultiesOn ?
@@ -214,9 +212,8 @@ function Filter(props) {
                     :
                     <></>
             }
-
-            <label htmlFor="unisCheckbox">Universities: </label>
             <input type="checkbox" id="unisCheckbox" name="unisCheckbox" onChange={() => setFilteredBy(prevState => ({ ...prevState, unisOn: !prevState.unisOn }))} checked={filteredBy.unisOn} />
+            <label htmlFor="unisCheckbox">Universities: </label>
             <br />
             {
                 unis && filteredBy.unisOn ?
@@ -228,12 +225,12 @@ function Filter(props) {
                                 <br />
                             </div>
                         )
-                    })                    
+                    })
                     :
                     <></>
             }
-            <label htmlFor="citiesCheckbox">Cities: </label>
             <input type="checkbox" id="citiesCheckbox" name="citiesCheckbox" onChange={() => setFilteredBy(prevState => ({ ...prevState, citiesOn: !prevState.citiesOn }))} checked={filteredBy.citiesOn} />
+            <label htmlFor="citiesCheckbox">Cities: </label>
             <br />
             {
                 cities && filteredBy.citiesOn ?
@@ -245,7 +242,7 @@ function Filter(props) {
                                 <br />
                             </div>
                         )
-                    })                    :
+                    }) :
                     <></>
             }
 

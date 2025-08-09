@@ -38,6 +38,15 @@ dataPool.authUser=(email)=>{
   })
 }
 
+dataPool.deleteUser=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('DELETE FROM User WHERE id = ?', id, (err,res, fields)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.updateUserInfo=(id, field, info)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`UPDATE User SET ${field} = ? WHERE id = ?`, [info, id], (err, res)=>{
@@ -65,6 +74,15 @@ dataPool.getRole=(id)=>{
     })
   })
 }
+dataPool.getInfo=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT * FROM User WHERE id = ? `, id, (err, res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.getFaculty=(id)=>{
   return new Promise((resolve, reject)=>{
     conn.query(`SELECT name, city, address, coordinates, working_hours, university, id FROM Faculty WHERE user_id = ? `, id, (err, res)=>{
@@ -272,6 +290,15 @@ dataPool.getDonationRequest=(id)=>{
 dataPool.listForumsASC=()=>{
   return new Promise((resolve, reject)=>{
     conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY date ASC`, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listForumsByFac=(id)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE faculty_id = ? ORDER BY date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })

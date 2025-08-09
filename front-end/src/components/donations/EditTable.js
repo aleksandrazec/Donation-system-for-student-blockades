@@ -7,15 +7,19 @@ function EditTable(props) {
     } = props
     var index = 0;
     function getCells(obj) {
-        return Object.values(obj).map(value => { index++
-            var text;
-            value==='Edit' ?
-            text=<td key={index} onClick={()=>{
-                navigate('/')
-            }}>{value}</td>
-            :
-            text=<td key={index}>{value}</td>
-            return text
+        return Object.entries(obj).map(([key, value]) => {
+            index++;
+            if (value === 'Edit') {
+                return (
+                    <td key={index} onClick={() => {
+                        navigate(`/editpg/${obj.id}`)
+                    }}>
+                        {value}
+                    </td>
+                );
+            } else {
+                return <td key={index}>{value}</td>;
+            }
         });
     }
     function getRows(data) {

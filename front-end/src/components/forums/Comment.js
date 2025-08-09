@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import api from '../../services/api'
 
-function Comment(props){
-    const{
+function Comment(props) {
+    const {
         id,
         text,
         date,
@@ -10,15 +10,15 @@ function Comment(props){
         last_name,
         user_id,
         forum_id
-    }=props
+    } = props
 
     const [replies, setReplies] = useState()
-    const [replyToBe, setReplyToBe]=useState()
+    const [replyToBe, setReplyToBe] = useState()
 
     useEffect(() => {
         const getReplies = () => {
             try {
-                api.post(`/forums/getreplies`, {id})
+                api.post(`/forums/getreplies`, { id })
                     .then(result => {
                         console.log(result.data)
                         setReplies(result.data)
@@ -28,37 +28,37 @@ function Comment(props){
                 console.error(error)
             }
         }
-        
+
         getReplies();
     }, [])
 
-    const postReply=async()=>{
-                    try {
-                api.post(`/forums/reply`, { text: replyToBe, user_id: 1, forum_id: forum_id , reply_id: id})
-                    .then(result => {
-                        setReplyToBe('')
-                        window.location.reload(false);
+    const postReply = async () => {
+        try {
+            api.post(`/forums/reply`, { text: replyToBe, user_id: 1, forum_id: forum_id, reply_id: id })
+                .then(result => {
+                    setReplyToBe('')
+                    window.location.reload(false);
 
-                    })
-                    .catch(err => console.error(err))
-            } catch (error) {
-                console.error(error)
-            }
+                })
+                .catch(err => console.error(err))
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    return(
+    return (
         <div>
             <h2>{text}</h2>
             <h3>Posted on {date} by {first_name} {last_name}</h3>
-             <input type="text" id="reply" name="reply" onChange={({target: {value: input}}) => setReplyToBe(input)} value={replyToBe}/><br/>
-            <button onClick={()=>postReply()}>Reply</button>
+            <input type="text" id="reply" name="reply" onChange={({ target: { value: input } }) => setReplyToBe(input)} value={replyToBe} /><br />
+            <button onClick={() => postReply()}>Reply</button>
 
-            <div id='replies' style={{color: "red"}}>
+            <div id='replies' style={{ color: "red" }}>
                 {
                     replies ?
-                    replies.map(com => <Comment id={com.id}forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id}/>)
-                    :
-                    <></>
+                        replies.map(com => <Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id} />)
+                        :
+                        <></>
                 }
             </div>
         </div>

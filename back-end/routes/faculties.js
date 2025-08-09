@@ -110,10 +110,8 @@ faculties.post('/info', urlencodedParser, async (req, res) => {
        try
        {
         let queryResult=await DB.showFacultyInfo(id);
-               if (queryResult.length>0) {
-               console.log("faculties info found")
-               res.json(queryResult)
-             }
+               console.log(queryResult[0])
+               res.json(queryResult[0])
        }
        catch(err){
            console.log(err)

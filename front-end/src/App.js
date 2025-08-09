@@ -35,7 +35,7 @@ function App(props) {
   return (
     <div>
       {
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={{...user, setUser}}>
           <TabContainer>
             <Outlet />
           </TabContainer>
