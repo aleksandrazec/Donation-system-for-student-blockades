@@ -1,11 +1,13 @@
 import { useParams, useNavigate } from 'react-router'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../Context'
 import api from '../../services/api';
 import Comment from './Comment'
 
 function ForumPage(props) {
     const { id } = useParams()
     const navigate = useNavigate()
+    const user = useContext(UserContext)
 
     const [info, setInfo] = useState({
         prompt: undefined,
@@ -16,6 +18,7 @@ function ForumPage(props) {
     })
     const [comments, setComments] = useState()
     const [commentToBe, setCommentToBe]=useState()
+    const [text, setText]=useState('')
 
     const goToFaculty = async () => {
         try {
@@ -53,8 +56,11 @@ function ForumPage(props) {
     }, [])
 
     const postComment=async()=>{
-                    try {
-                api.post(`/forums/comment`, { text: commentToBe, user_id: 1, forum_id: id })
+        if(user.role==='Guest'){
+            setText('Please log in to post comments')
+        }else{
+            try {
+                api.post(`/forums/comment`, { text: commentToBe, user_id: user.user_id, forum_id: id })
                     .then(result => {
                         setCommentToBe('')
                         window.location.reload(false);
@@ -64,6 +70,7 @@ function ForumPage(props) {
             } catch (error) {
                 console.error(error)
             }
+        }
     }
 
     return (
@@ -83,7 +90,7 @@ function ForumPage(props) {
                 <h2>Comments: </h2>
   <input type="text" id="comment" name="comment" onChange={({target: {value: input}}) => setCommentToBe(input)} value={commentToBe}/><br/>
   <button onClick={()=>postComment()}>Comment</button>
-
+<p>{text}</p>
 {
     comments ?
     comments.map(com => <Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id}/>)

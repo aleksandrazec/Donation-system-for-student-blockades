@@ -1,30 +1,32 @@
-import api from '../../services/api';
 import { useState, useEffect, useContext } from 'react'
-import EditTable from './EditTable'
+import api from '../../services/api';
+import EditUserTable from './EditUserTable'
 import { UserContext } from '../../Context'
-import { useParams, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router'
 
-function EditDonationRequests(props) {
-    const [requests, setRequests] = useState()
-    const { id } = useParams();
+function Users(props) {
+    const [users, setUsers] = useState()
     const user = useContext(UserContext)
     const navigate = useNavigate()
-    useEffect(() => {
-        if (user.role !== 'Student') {
+
+    useEffect(()=>{
+        if(user.role!=='Admin'){
             navigate(`/`)
         }
-    }, [navigate, user])
+    },[navigate, user])
+
     useEffect(() => {
-        const getRequests = async () => {
+        const getUsers = () => {
             try {
-                api.post(`/donationrequests/listforfac`, { id: id })
+                api.get(`/users/listnotadmin`)
                     .then((result) => {
                         console.log(result.data)
                         const modifiedData = result.data.map(item => ({
                             ...item,
                             Edit: 'Edit',
                         }));
-                        setRequests(modifiedData);
+                        setUsers(modifiedData);
+                        console.log(modifiedData)
                     })
                     .catch(err => console.error('api error: ', err));
 
@@ -32,12 +34,14 @@ function EditDonationRequests(props) {
                 console.error('error: ', error)
             }
         }
-        getRequests()
-    }, [id])
+        getUsers()
+    }, [])
 
     return (
-        <EditTable data={requests} />
+        <div>
+            <EditUserTable data={users} />
+        </div>
     )
 }
 
-export default EditDonationRequests
+export default Users

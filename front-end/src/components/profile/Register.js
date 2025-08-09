@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
 import api from '../../services/api'
+import { UserContext } from '../../Context'
 import { useNavigate } from 'react-router'
 
 function Register(props) {
@@ -9,7 +10,13 @@ function Register(props) {
     const [lastName, setLastName] = useState('')
     const [city, setCity] = useState('')
     const navigate = useNavigate()
+    const user = useContext(UserContext)
 
+    useEffect(()=>{
+        if(user.role!=='Guest'){
+            navigate(`/profile`)
+        }
+    },[navigate, user])
 
     const register = async () => {
         try {

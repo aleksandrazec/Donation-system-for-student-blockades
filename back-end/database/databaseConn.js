@@ -38,6 +38,24 @@ dataPool.authUser=(email)=>{
   })
 }
 
+dataPool.listCitizen=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT * FROM User WHERE role='Citizen' `, (err,res, fields)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
+dataPool.listNotAdmin=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query(`SELECT * FROM User WHERE role!='Admin' `, (err,res, fields)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.deleteUser=(id)=>{
   return new Promise((resolve, reject)=>{
     conn.query('DELETE FROM User WHERE id = ?', id, (err,res, fields)=>{
@@ -198,6 +216,15 @@ dataPool.findFaculties=(uni)=>{
     })
   })
 }
+dataPool.findFacultiesAll=()=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT * FROM Faculty', (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 
 dataPool.listDonationTypeENUM=()=>{
   return new Promise((resolve, reject)=>{
@@ -278,6 +305,16 @@ dataPool.listDonationRequestFac=(id)=>{
     })
   })
 }
+
+dataPool.listDonationRequestCity=(city)=>{
+  return new Promise((resolve, reject)=>{
+    conn.query('SELECT item, type, urgency_level, quantity,  date, name, university, city FROM Type_of_donation INNER JOIN Donation_request ON Type_of_donation.subtype=Donation_request.item INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id WHERE city = ? ORDER BY date DESC', city, (err,res)=>{
+      if(err){return reject(err)}
+      return resolve(res)
+    })
+  })
+}
+
 dataPool.getDonationRequest=(id)=>{
   return new Promise((resolve, reject)=>{
     conn.query('SELECT * FROM Donation_request WHERE id = ?', id, (err,res)=>{

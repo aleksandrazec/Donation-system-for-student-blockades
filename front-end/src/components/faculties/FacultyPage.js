@@ -9,12 +9,12 @@ function FacultyPage(props){
 
 
     const [info, setInfo] = useState({
-        name:undefined,
-        university:undefined,
-        address:undefined,
-        city:undefined,
-        coordinates:undefined,
-        working_hours:undefined
+        name:'',
+        university:'',
+        address:'',
+        city:'',
+        coordinates:'',
+        working_hours:''
     });
 
    
@@ -32,7 +32,7 @@ function FacultyPage(props){
         try {
             api.post(`/faculties/info`, {id: id})
             .then(result=>{
-                setInfo(result.data[0])})
+                setInfo(result.data)})
             .catch(err=>console.error(err))
         } catch (error) {
             console.error(error)
@@ -43,10 +43,10 @@ function FacultyPage(props){
     return(
         <div>
             {
-                info ?
+                info.name!=='' ?
                 <div>
                     <h1>{info.name}</h1>
-                    <h3>Of university: <h3 onClick={()=>{goToUni()}}>{info.university}</h3></h3>
+                    <h3 onClick={()=>{goToUni()}}>Of university: {info.university}</h3>
                     <h3>Working hours: {info.working_hours}</h3>
                     <h3>City: {info.city}</h3>
                     <h3>Address: {info.address}</h3>

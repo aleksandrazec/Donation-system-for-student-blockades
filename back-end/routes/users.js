@@ -63,8 +63,8 @@ users.get('/session', async (req, res, next) => {
 users.get('/logout', async (req, res, next) => {
     try {
         req.session.logged_in = false;
-        req.session.user_id =0;
-        req.session.role ='Guest'
+        req.session.user_id = 0;
+        req.session.role = 'Guest'
         console.log(req.session)
         res.json(req.session)
 
@@ -226,12 +226,7 @@ users.post('/setrole', urlencodedParser, async (req, res) => {
         if (role == 'Citizen' || role == 'Student' || role == 'Admin') {
             try {
                 var queryResult = await DB.setRole(id, role)
-                if (queryResult.affectedRows) {
-                    res.json({
-                        "success": true,
-                        "message": `User's role set`
-                    })
-                }
+                res.json(id, role, queryResult)
             }
             catch (err) {
                 console.log(err)
@@ -269,6 +264,39 @@ users.post('/getinfo', urlencodedParser, async (req, res) => {
         console.log("A field is empty!!")
     }
     res.end()
+})
+
+users.get('/listcitizen', urlencodedParser, async (req, res) => {
+    try {
+        let queryResult = await DB.listCitizen();
+        if (queryResult.length > 0) {
+            console.log(queryResult)
+            console.log("OK");
+            res.json(queryResult);
+            res.status(200)
+        } else {
+            console.log("no citizens?");
+            res.status(204)
+        }
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+    res.end();
+});
+users.get('/listnotadmin', urlencodedParser, async (req, res) => {
+    try {
+        let queryResult = await DB.listNotAdmin();
+        console.log(queryResult)
+        res.json(queryResult);
+        res.status(200)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+    res.end();
 });
 
 module.exports = users

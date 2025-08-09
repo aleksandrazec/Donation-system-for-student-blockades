@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import api from '../../services/api'
 import { useNavigate } from 'react-router'
 import { UserContext } from '../../Context'
 
 function LogIn(props) {
-    const {setUser} = useContext(UserContext)
+    const user = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
@@ -15,13 +16,18 @@ function LogIn(props) {
             console.error(error)
         }
     }
+    useEffect(() => {
+        if (user.role !== 'Guest') {
+            navigate(`/profile`)
+        }
+    }, [navigate, user])
     const logIn = async () => {
         try {
             api.post(`/users/login`, { email: email, password: password })
                 .then(result => {
                     setUser({
                         role: result.data.role,
-                        user_id:result.data.user_id
+                        user_id: result.data.user_id
                     })
                     navigate(`/profile`)
                 })

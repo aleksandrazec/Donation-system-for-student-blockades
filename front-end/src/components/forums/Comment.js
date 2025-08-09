@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../Context'
 import api from '../../services/api'
 
 function Comment(props) {
@@ -11,10 +12,10 @@ function Comment(props) {
         user_id,
         forum_id
     } = props
-
+    const user = useContext(UserContext)
     const [replies, setReplies] = useState()
     const [replyToBe, setReplyToBe] = useState()
-
+    const [textt, setTextt] = useState('')
     useEffect(() => {
         const getReplies = () => {
             try {
@@ -33,18 +34,21 @@ function Comment(props) {
     }, [])
 
     const postReply = async () => {
-        try {
-            api.post(`/forums/reply`, { text: replyToBe, user_id: 1, forum_id: forum_id, reply_id: id })
-                .then(result => {
-                    setReplyToBe('')
-                    window.location.reload(false);
-
-                })
-                .catch(err => console.error(err))
-        } catch (error) {
-            console.error(error)
-        }
+        if (user.role === 'Guest') {
+            setTextt('Please log in to post comments')
+        } else
+            try {
+                api.post(`/forums/reply`, { text: replyToBe, user_id: 1, forum_id: forum_id, reply_id: id })
+                    .then(result => {
+                        setReplyToBe('')
+                        window.location.reload(false);
+                    })
+                    .catch(err => console.error(err))
+            } catch (error) {
+                console.error(error)
+            }
     }
+
 
     return (
         <div>
@@ -52,7 +56,7 @@ function Comment(props) {
             <h3>Posted on {date} by {first_name} {last_name}</h3>
             <input type="text" id="reply" name="reply" onChange={({ target: { value: input } }) => setReplyToBe(input)} value={replyToBe} /><br />
             <button onClick={() => postReply()}>Reply</button>
-
+            <p>{textt}</p>
             <div id='replies' style={{ color: "red" }}>
                 {
                     replies ?

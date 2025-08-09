@@ -1,12 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import ForumCard from './ForumCard'
 import api from '../../services/api'
-import { useParams } from 'react-router';
+import { UserContext } from '../../Context'
+import { useParams, useNavigate } from 'react-router';
 
 function EditForum(props) {
+    const user = useContext(UserContext)
+    const navigate = useNavigate()
     const { id } = useParams();
     const [forums, setForums] = useState([])
-
+    useEffect(()=>{
+        if(user.role!=='Student'){
+            navigate(`/`)
+        }
+    },[navigate, user])
     useEffect(() => {
         const getForums = () => {
             try {
@@ -30,7 +37,7 @@ function EditForum(props) {
                 .then(result => {
                     console.log(result.data)
                     setForums([])
-                    id=id
+                    id = id
                 })
                 .catch(err => console.error(err))
         } catch (error) {
@@ -46,7 +53,7 @@ function EditForum(props) {
                     forums.map(forum =>
                         <div>
                             <ForumCard prompt={forum.prompt} date={forum.date} name={forum.name} id={forum.id} key={forum.id} faculty_id={forum.faculty_id} />
-                            <button key={forum.id+'button'} onClick={() => deleteForum(forum.id)}>Delete</button>
+                            <button key={forum.id + 'button'} onClick={() => deleteForum(forum.id)}>Delete</button>
                         </div>)
                     :
                     <></>

@@ -1,179 +1,182 @@
-const express= require("express")
+const express = require("express")
 const donationrequests = express.Router();
-const DB=require('../database/databaseConn.js')
+const DB = require('../database/databaseConn.js')
 
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 donationrequests.get('/typelist', urlencodedParser, async (req, res) => {
-       try
-       {
-        let queryResult1=await DB.listDonationTypeENUM();
+    try {
+        let queryResult1 = await DB.listDonationTypeENUM();
         console.log(queryResult1)
         var data = queryResult1[0].COLUMN_TYPE;
         console.log(data)
-        data=data.slice(6, data.length-2);
+        data = data.slice(6, data.length - 2);
         console.log(data)
         var typesArray = data.split(`','`)
         console.log(typesArray)
         res.json(typesArray)
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   res.end();
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+    res.end();
 });
 
 donationrequests.post('/type', urlencodedParser, async (req, res) => {
- var type = req.body.type;
-   if (type)
-   {
-       try
-       {
-        let queryResult1=await DB.listDonationTypeENUM();
-        console.log(queryResult1)
-        var data = queryResult1[0].COLUMN_TYPE;
-        console.log(data)
-        data=data.slice(5, data.length-1);
-        console.log(data)
-        var newsql=`ALTER TABLE Type_of_donation MODIFY type ENUM(`+data+`,'`+type+`')`
-        
-        let queryResult=await DB.runSQL(newsql)
-               if (queryResult.affectedRows) {
-               console.log("New donation type added!!")
-               res.json({
-                "success": true,
-                "message": "New donation type added!!"
-               })
-             }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Please enter donation type!!!")
-       res.status(204)
-   }
-   res.end();
+    var type = req.body.type;
+    if (type) {
+        try {
+            let queryResult1 = await DB.listDonationTypeENUM();
+            console.log(queryResult1)
+            var data = queryResult1[0].COLUMN_TYPE;
+            console.log(data)
+            data = data.slice(5, data.length - 1);
+            console.log(data)
+            var newsql = `ALTER TABLE Type_of_donation MODIFY type ENUM(` + data + `,'` + type + `')`
+
+            let queryResult = await DB.runSQL(newsql)
+            if (queryResult.affectedRows) {
+                console.log("New donation type added!!")
+                res.json({
+                    "success": true,
+                    "message": "New donation type added!!"
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Please enter donation type!!!")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.get('/subtypelist', urlencodedParser, async (req, res) => {
-       try
-       {
-        let queryResult1=await DB.listDonationSubtypes();
+    try {
+        let queryResult1 = await DB.listDonationSubtypes();
         console.log(queryResult1)
         res.json(queryResult1)
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   res.end();
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500)
+    }
+    res.end();
 });
 
 donationrequests.post('/gettype', urlencodedParser, async (req, res) => {
- var subtype = req.body.subtype;
-   if (subtype)
-   {
-       try
-       {
-        let queryResult=await DB.getDonationType(subtype);
+    var subtype = req.body.subtype;
+    if (subtype) {
+        try {
+            let queryResult = await DB.getDonationType(subtype);
             res.json(queryResult);
             console.log(queryResult)
 
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.post('/listforfac', urlencodedParser, async (req, res) => {
- var id = req.body.id;
-   if (id)
-   {
-       try
-       {
-        let queryResult=await DB.listDonationRequestFac(id);
+    var id = req.body.id;
+    if (id) {
+        try {
+            let queryResult = await DB.listDonationRequestFac(id);
             res.json(queryResult);
             console.log(queryResult)
 
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
+});
+donationrequests.post('/listforcity', urlencodedParser, async (req, res) => {
+    var city = req.body.city;
+    if (city) {
+        try {
+            let queryResult = await DB.listDonationRequestCity(city);
+            res.json(queryResult);
+            console.log(queryResult)
+
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.post('/getreq', urlencodedParser, async (req, res) => {
- var id = req.body.id;
-   if (id)
-   {
-       try
-       {
-        let queryResult=await DB.getDonationRequest(id);
+    var id = req.body.id;
+    if (id) {
+        try {
+            let queryResult = await DB.getDonationRequest(id);
             res.json(queryResult[0]);
             console.log(queryResult[0])
 
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.post('/subtype', urlencodedParser, async (req, res) => {
- var type = req.body.type;
- var subtype = req.body.subtype;
-   if (type&&subtype)
-   {
-       try
-       {
-        let queryResult=await DB.createDonationSubtype(subtype, type);
-               if (queryResult.affectedRows) {
-               console.log("New donation subtype added!!")
-               res.json({
-                "success": true,
-                "message": "New donation subtype added!!"
-               })
-             }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+    var type = req.body.type;
+    var subtype = req.body.subtype;
+    if (type && subtype) {
+        try {
+            let queryResult = await DB.createDonationSubtype(subtype, type);
+            if (queryResult.affectedRows) {
+                console.log("New donation subtype added!!")
+                res.json({
+                    "success": true,
+                    "message": "New donation subtype added!!"
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 donationrequests.post('/create', urlencodedParser, async (req, res) => {
@@ -282,32 +285,29 @@ donationrequests.post('/update', urlencodedParser, async (req, res) => {
 });
 
 donationrequests.post('/delete', urlencodedParser, async (req, res) => {
- var id = req.body.id;
-   if (id)
-   {
-       try
-       {
-        let queryResult=await DB.deleteDonationRequest(id);
-               if (queryResult.affectedRows) {
-               console.log("Donation request deleted")
-               res.json({
-                "success": true,
-                "message": "Donation request deleted"
-               })
-             }
-       }
-       catch(err){
-           console.log(err)
-           res.status(500)
-       }   
-   }
-   else
-   {
-       console.log("Field/s missing")
-       res.status(204)
-   }
-   res.end();
+    var id = req.body.id;
+    if (id) {
+        try {
+            let queryResult = await DB.deleteDonationRequest(id);
+            if (queryResult.affectedRows) {
+                console.log("Donation request deleted")
+                res.json({
+                    "success": true,
+                    "message": "Donation request deleted"
+                })
+            }
+        }
+        catch (err) {
+            console.log(err)
+            res.status(500)
+        }
+    }
+    else {
+        console.log("Field/s missing")
+        res.status(204)
+    }
+    res.end();
 });
 
 
-module.exports=donationrequests
+module.exports = donationrequests

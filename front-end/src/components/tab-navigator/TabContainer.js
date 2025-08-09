@@ -1,11 +1,11 @@
 import TabItem from './TabItem';
 import { UserContext } from '../../Context'
-import {useContext} from 'react'
+import { useContext } from 'react'
 
 function TabContainer({ children }) {
     const user = useContext(UserContext)
     const getTabs = () => {
-        if(user.role==='Student' || user.role==='Admin'){
+        if (user.role === 'Student') {
             return [
                 {
                     text: 'Home',
@@ -28,7 +28,34 @@ function TabContainer({ children }) {
                     url: '/profile',
                 },
             ]
-        }else if(user.role==='Citizen'){
+        } else if (user.role === 'Admin') {
+            return [
+                {
+                    text: 'Home',
+                    url: '/',
+                },
+                {
+                    text: 'Faculties in blockade',
+                    url: '/facultiesgen',
+                },
+                {
+                    text: 'Forums',
+                    url: '/forums',
+                },
+                {
+                    text: 'Search donation requests',
+                    url: '/search',
+                },
+                {
+                    text: 'Users',
+                    url: '/users',
+                },
+                {
+                    text: 'Profile',
+                    url: '/profile',
+                },
+            ]
+        } else if (user.role === 'Citizen') {
             return [
                 {
                     text: 'Home',
@@ -51,7 +78,7 @@ function TabContainer({ children }) {
                     url: '/profile',
                 },
             ]
-        }else{
+        } else {
             return [
                 {
                     text: 'Home',

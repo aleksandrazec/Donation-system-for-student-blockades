@@ -21,6 +21,12 @@ import EditDonationRequests from './components/donations/EditDonationRequests'
 import EditPage from './components/donations/EditPage'
 import AddUni from './components/admin-page/AddUni'
 import AddFac from './components/admin-page/AddFac'
+import SetFacManager from './components/admin-page/SetFacManager'
+import EditFacultiesAdmin from './components/admin-page/EditFacultiesAdmin'
+import EditFacultyAdmin from './components/admin-page/EditFacultyAdmin'
+import Users from './components/admin-page/Users'
+import EditUser from './components/admin-page/EditUser'
+import HomePage from './components/home-page/HomePage'
 
 class AppRouter extends Component {
     render() {
@@ -28,6 +34,7 @@ class AppRouter extends Component {
             <BrowserRouter forceRefresh={true}>
                 <Routes>
                     <Route path="/" element={<App />}>
+                        <Route index={true} element={<HomePage/>}/>
                         <Route path="login" element={<LogIn />} />
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />
@@ -48,6 +55,11 @@ class AppRouter extends Component {
                         <Route path="editprofile" element={<EditProfile />} />
                         <Route path="adduni" element={<AddUni />} />
                         <Route path="addfac" element={<AddFac />} />
+                        <Route path="facman" element={<SetFacManager />} />
+                        <Route path="editfacs" element={<EditFacultiesAdmin />} />
+                        <Route path="editfacs/:id" element={<EditFacultyAdmin />} />
+                        <Route path="users" element={<Users />} />
+                        <Route path="users/:id" element={<EditUser />} />
 
                     </Route>
                 </Routes>

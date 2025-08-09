@@ -86,7 +86,9 @@ search.post('/', urlencodedParser, async (req,res)=>{
         }
         sqlStart=sqlHelper
     }
-
+    if(!filter && !sort){
+        sqlStart+=` ORDER BY date DESC`
+    }
     try
        {
         console.log(sqlStart)

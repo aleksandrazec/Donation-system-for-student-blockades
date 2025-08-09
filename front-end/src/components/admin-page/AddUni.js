@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import api from '../../services/api';
+import { UserContext } from '../../Context'
+import {useNavigate} from 'react-router'
 
 function AddUni(props) {
-
+    const user = useContext(UserContext)
+    const navigate=useNavigate()
     const [uni, setUni] = useState('')
     const [text, setText] = useState('')
     const addUni = async () => {
@@ -13,6 +16,11 @@ function AddUni(props) {
             })
             .catch(err => console.error('api error: ', err));
     }
+    useEffect(()=>{
+        if(user.role!=='Admin'){
+            navigate(`/`)
+        }
+    },[navigate, user])
     return (
         <div>
             <h3>Add new university in blockade:</h3>

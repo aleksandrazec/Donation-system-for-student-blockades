@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router';
 import api from '../../services/api';
 import { useNavigate } from 'react-router';
+import { UserContext } from '../../Context'
 
 function EditPage(props) {
     const { id } = useParams();
     const navigate = useNavigate()
-
+    const user = useContext(UserContext)
     const [data, setData] = useState({
         id: undefined,
         quantity: undefined,
@@ -21,7 +22,11 @@ function EditPage(props) {
         quantity: '',
         urgencyLevel: ''
     })
-
+    useEffect(()=>{
+        if(user.role!=='Student'){
+            navigate(`/`)
+        }
+    },[navigate, user])
     useEffect(() => {
         const getData = () => {
             try {

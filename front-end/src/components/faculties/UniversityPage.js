@@ -38,7 +38,7 @@ function UniversityPage(props){
             faculties ?
             faculties.map(fac => <FacultyCard name={fac.name} key={fac.id} id={fac.id}/>)
             :
-            <p>Loaidng</p>
+            <p>Loading</p>
         }
         </div>
     )

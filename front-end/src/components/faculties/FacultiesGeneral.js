@@ -8,10 +8,10 @@ function FacultiesGeneral(props) {
     const user = useContext(UserContext)
     const [faculty, setFaculty] = useState({
         name: '',
-        city:'',
-        address:'',
-        coordinates:'',
-        working_hours:'',
+        city: '',
+        address: '',
+        coordinates: '',
+        working_hours: '',
         university: '',
         id: ''
     })
@@ -98,6 +98,20 @@ function FacultiesGeneral(props) {
             console.error(error)
         }
     }
+    const setFacManger = async () => {
+        try {
+            navigate(`/facman`)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const editFaculties = async () => {
+        try {
+            navigate(`/editfacs`)
+        } catch (error) {
+            console.error(error)
+        }
+    }
     return (
         <div>
             {
@@ -113,9 +127,10 @@ function FacultiesGeneral(props) {
                     :
                     <div>
                         <h3>You're an admin</h3>
-                        <button onClick={()=>addUni()}>Add new university in blockade</button>
-                        <button onClick={()=>addFac()}>Add new faculty in blockade</button>
-                        <button>Edit faculties in blockade</button>
+                        <button onClick={() => addUni()}>Add new university in blockade</button>
+                        <button onClick={() => addFac()}>Add new faculty in blockade</button>
+                        <button onClick={()=>setFacManger()}>Set faculty's student manager</button>
+                        <button onClick={()=>editFaculties()}>Edit faculties in blockade</button>
                     </div>
             }
             <div>

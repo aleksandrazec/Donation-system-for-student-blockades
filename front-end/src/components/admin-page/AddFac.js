@@ -1,7 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../Context'
+import {useNavigate} from 'react-router'
 import api from '../../services/api';
 
 function AddFac(props) {
+    const user = useContext(UserContext)
+    const navigate=useNavigate()
     const [state, setState] = useState({
         name: '',
         city: '',
@@ -13,10 +17,15 @@ function AddFac(props) {
     const [unis, setUnis] = useState([])
     const [text, setText] = useState('')
 
+    useEffect(()=>{
+        if(user.role!=='Admin'){
+            navigate(`/`)
+        }
+    },[navigate, user])
     useEffect(() => {
         const getUnis = async () => {
             try {
-                const { data } = await api.get('/faculties/listuni')
+                const { data } = await api.get('/faculties/listuniall')
                 console.log(data)
                 setUnis(data);
             } catch (error) {
