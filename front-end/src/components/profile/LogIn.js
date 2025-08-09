@@ -9,6 +9,7 @@ function LogIn(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const [text, setText] = useState('')
     const goToRegister = async () => {
         try {
             navigate(`/register`)
@@ -22,18 +23,27 @@ function LogIn(props) {
         }
     }, [navigate, user])
     const logIn = async () => {
-        try {
-            api.post(`/users/login`, { email: email, password: password })
-                .then(result => {
-                    setUser({
-                        role: result.data.role,
-                        user_id: result.data.user_id
+        if (email && password) {
+            try {
+                api.post(`/users/login`, { email: email, password: password })
+                    .then(result => {
+                        setUser({
+                            role: result.data.role,
+                            user_id: result.data.user_id
+                        })
+                        if (user.role !== 'Guest') {
+                            navigate(`/profile`)
+                        } else {
+                            setText(`Something went wrong`)
+                        }
+
                     })
-                    navigate(`/profile`)
-                })
-                .catch(err => console.error(err))
-        } catch (error) {
-            console.error(error)
+                    .catch(err => console.error(err))
+            } catch (error) {
+                console.error(error)
+            }
+        } else {
+            setText('Missing a field')
         }
     }
 
@@ -44,8 +54,10 @@ function LogIn(props) {
                 <p>Email:</p>
                 <input type="text" id="email" name="email" onChange={({ target: { value: input } }) => setEmail(input)} value={email} /><br />
                 <p>Password:</p>
-                <input type="text" id="password" name="password" onChange={({ target: { value: input } }) => setPassword(input)} value={password} /><br />
+                <input type="password" id="password" name="password" onChange={({ target: { value: input } }) => setPassword(input)} value={password} /><br />
                 <button onClick={() => logIn()}>Log In</button>
+                <br/>
+                {text}
                 <p>Don't have an account?</p>
                 <button onClick={() => goToRegister()}>Register</button>
             </div>

@@ -27,15 +27,27 @@ users.post('/login', urlencodedParser, async (req, res) => {
                     })
                 }
                 else {
-                    console.log("INCORRECT PASSWORD");
+                    res.json({
+                        role: 'Guest',
+                        user_id: 0
+                    })
+                    console.error("INCORRECT PASSWORD");
                     res.status(204)
                 }
             } else {
-                console.log("USER NOT REGISTRED");
+                res.json({
+                        role: 'Guest',
+                        user_id: 0
+                    })
+                console.error("USER NOT REGISTRED");
                 res.status(204)
             }
         }
         catch (err) {
+            res.json({
+                        role: 'Guest',
+                        user_id: 0
+                    })
             console.log(err)
             res.status(500)
         }

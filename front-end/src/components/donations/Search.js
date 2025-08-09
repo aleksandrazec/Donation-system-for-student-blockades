@@ -12,7 +12,7 @@ function Search(props) {
     })
 
     const [textInput, setTextInput] = useState('')
-    const [searchResult, setSearchResult] = useState()
+    const [searchResult, setSearchResult] = useState(null)
 
     const [faculties, setFaculties] = useState()
     const handleFaculties = (childData) => {
@@ -76,19 +76,35 @@ function Search(props) {
         }
         if (settings.sorting) {
             quantityValue = sortedBy.byQuantity ? (quantity ? 1 : 2) : 0
-            urgencyLevelValue = sortedBy.byUrgencyLevel ? (urgencyLevel ? 1 : 2 ): 0
-            dateValue = sortedBy.byDate ? ( date ? 1 : 2 ): 0
+            urgencyLevelValue = sortedBy.byUrgencyLevel ? (urgencyLevel ? 1 : 2) : 0
+            dateValue = sortedBy.byDate ? (date ? 1 : 2) : 0
             console.log(quantityValue, urgencyLevelValue, dateValue)
         }
 
         try {
             const { data } = await api.post('/search/',
                 { filter: settings.filter, sort: settings.sorting, faculties: facString, unis: uniString, types: typeString, items: itemString, cities: cityString, quantity: quantityValue, date: dateValue, urgency_level: urgencyLevelValue });
-            setSearchResult(data);
             console.log(data)
+            if (settings.search) {
+                const data2 = data.filter(arraySearch)
+                if (data2) {
+                    setSearchResult(data2)
+                    console.log(data2)
+                } else {
+                    setSearchResult([])
+                }
+            } else {
+                setSearchResult(data);
+                console.log(data)
+            }
         } catch (err) {
             console.error(err.response?.data?.error || err.message);
+            setSearchResult([])
         }
+    }
+    const arraySearch = (element) => {
+        var regex = `.*` + textInput + `.*`
+        return element.item.match(regex)
     }
     const format = (dataObj, stateKey) => {
         const { [stateKey]: items, [stateKey + 'State']: stateArray } = dataObj;
@@ -125,10 +141,11 @@ function Search(props) {
             <br />
             <button onClick={() => searchButton()}> Search </button>
             {
-                searchResult!=='' ?
-                    <Table data={searchResult} />
-                    :
-                    <p>No results for your search criteria.</p>
+                searchResult === null ? null : (
+                    searchResult.length > 0
+                        ? <Table data={searchResult} />
+                        : <p>No results for your search criteria.</p>
+                )
             }
         </div>
     )

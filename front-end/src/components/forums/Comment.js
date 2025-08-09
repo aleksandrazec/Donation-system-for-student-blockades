@@ -9,7 +9,6 @@ function Comment(props) {
         date,
         first_name,
         last_name,
-        user_id,
         forum_id
     } = props
     const user = useContext(UserContext)
@@ -19,7 +18,7 @@ function Comment(props) {
     useEffect(() => {
         const getReplies = () => {
             try {
-                api.post(`/forums/getreplies`, { id })
+                api.post(`/forums/getreplies`, { id:id })
                     .then(result => {
                         console.log(result.data)
                         setReplies(result.data)
@@ -31,14 +30,14 @@ function Comment(props) {
         }
 
         getReplies();
-    }, [])
+    }, [id])
 
     const postReply = async () => {
         if (user.role === 'Guest') {
             setTextt('Please log in to post comments')
         } else
             try {
-                api.post(`/forums/reply`, { text: replyToBe, user_id: 1, forum_id: forum_id, reply_id: id })
+                api.post(`/forums/reply`, { text: replyToBe, user_id: user.user_id, forum_id: forum_id, reply_id: id })
                     .then(result => {
                         setReplyToBe('')
                         window.location.reload(false);

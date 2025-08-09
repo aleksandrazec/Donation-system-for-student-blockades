@@ -14,10 +14,13 @@ function CreateDonationRequest(props){
     const [items, setItems]=useState([])
     const [types, setTypes]=useState([])
     const [typeFromBackend, setTypeFromBackend] = useState("");
+    const [text, setText]=useState('')
 
     const addDonationRequest = async()=>{
         try{
             api.post('/donationrequests/create', {  ...state, type: typeFromBackend !== '' ? typeFromBackend : state.type})
+            setText('Created donation request.')
+            setState(prev => ({ ...prev, quantity: 0, urgency_level: 'Urgent', item: '', type: '' }));
         }catch(error){
             console.error(error)
         }
@@ -120,6 +123,8 @@ function CreateDonationRequest(props){
             </select>
             <br/>
             <button onClick={()=> addDonationRequest()}>Create Donation request</button>
+            <br/>
+            {text}
         </div>
     )
 }

@@ -380,7 +380,7 @@ dataPool.deleteForum=(id)=>{
 
 dataPool.getComments=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT Comment.id , text, date, reply_id, first_name, last_name, user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id WHERE reply_id IS NULL AND forum_id = ? ORDER BY date DESC`, id, (err,res)=>{
+    conn.query(`SELECT Comment.id , text, Comment.date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id IS NULL AND forum_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -389,8 +389,9 @@ dataPool.getComments=(id)=>{
 
 dataPool.getReplies=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT Comment.id , text, date, reply_id, first_name, last_name, user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id WHERE reply_id = ? ORDER BY date DESC`, id, (err,res)=>{
+    conn.query(`SELECT Comment.id , text, Comment.date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
+      console.log(res)
       return resolve(res)
     })
   })
