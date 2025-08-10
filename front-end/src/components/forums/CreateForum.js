@@ -32,7 +32,7 @@ function CreateForum(props) {
             <h3>Create Forum</h3>
             <p>Type in prompt</p>
             <input type="text" id="prompt" name="prompt" onChange={({ target: { value: input } }) => setPrompt(input)} value={prompt} /><br />
-            <button onClick={()=>createForum()}>Post</button><br />
+            <button className="buttons-list" onClick={()=>createForum()}>Post</button><br />
             {text}
         </div>
     )

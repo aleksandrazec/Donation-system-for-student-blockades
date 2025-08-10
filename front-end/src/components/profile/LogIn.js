@@ -55,11 +55,11 @@ function LogIn(props) {
                 <input type="text" id="email" name="email" onChange={({ target: { value: input } }) => setEmail(input)} value={email} /><br />
                 <p>Password:</p>
                 <input type="password" id="password" name="password" onChange={({ target: { value: input } }) => setPassword(input)} value={password} /><br />
-                <button onClick={() => logIn()}>Log In</button>
+                <button className="buttons-list" onClick={() => logIn()}>Log In</button>
                 <br/>
                 {text}
                 <p>Don't have an account?</p>
-                <button onClick={() => goToRegister()}>Register</button>
+                <button className="buttons-list" onClick={() => goToRegister()}>Register</button>
             </div>
         </div>
     )

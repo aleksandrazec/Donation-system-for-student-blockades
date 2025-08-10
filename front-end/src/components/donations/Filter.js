@@ -167,7 +167,7 @@ function Filter(props) {
                 types && filteredBy.typesOn ?
                     types.map(type => {
                         return (
-                            <div key={type.key - 1}>
+                            <div className='subfilter' key={type.key - 1}>
                                 <input type="checkbox" id={type.key - 1} value={type.name} name={type.name} checked={typesState[type.key - 1]} onChange={() => handleTypesChange(type.key - 1)} />
                                 <label htmlFor={type.name}>{type.name}</label>
                                 <br />
@@ -184,7 +184,7 @@ function Filter(props) {
                 items && filteredBy.itemsOn ?
                     items.map(item => {
                         return (
-                            <div key={item.key - 1}>
+                            <div className='subfilter'  key={item.key - 1}>
                                 <input type="checkbox" id={item.key - 1} value={item.name} name={item.name} checked={itemsState[item.key - 1]} onChange={() => handleItemsChange(item.key - 1)} />
                                 <label htmlFor={item.name}>{item.name}</label>
                                 <br />
@@ -202,7 +202,7 @@ function Filter(props) {
                 faculties && filteredBy.facultiesOn ?
                     faculties.map(faculty => {
                         return (
-                            <div key={faculty.key - 1}>
+                            <div className='subfilter'  key={faculty.key - 1}>
                                 <input type="checkbox" id={faculty.key - 1} value={faculty.name} name={faculty.name} checked={facultiesState[faculty.key - 1]} onChange={() => handleFacultiesChange(faculty.key - 1)} />
                                 <label htmlFor={faculty.name}>{faculty.name}</label>
                                 <br />
@@ -219,7 +219,7 @@ function Filter(props) {
                 unis && filteredBy.unisOn ?
                     unis.map(uni => {
                         return (
-                            <div key={uni.key - 1}>
+                            <div className='subfilter'  key={uni.key - 1}>
                                 <input type="checkbox" id={uni.key - 1} value={uni.name} name={uni.name} checked={unisState[uni.key - 1]} onChange={() => handleUnisChange(uni.key - 1)} />
                                 <label htmlFor={uni.name}>{uni.name}</label>
                                 <br />
@@ -236,7 +236,7 @@ function Filter(props) {
                 cities && filteredBy.citiesOn ?
                     cities.map(city => {
                         return (
-                            <div key={city.key - 1}>
+                            <div  className='subfilter' key={city.key - 1}>
                                 <input type="checkbox" id={city.key - 1} value={city.name} name={city.name} checked={citiesState[city.key - 1]} onChange={() => handleCitiesChange(city.key - 1)} />
                                 <label htmlFor={city.name}>{city.name}</label>
                                 <br />

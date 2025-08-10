@@ -20,7 +20,7 @@ search.post('/', urlencodedParser, async (req,res)=>{
 
     
     var sqlBuilder= []
-    var sqlStart='SELECT item, type, urgency_level, quantity, date, name, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype'
+    var sqlStart='SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype'
     var sqlPart=''
     if(filter){
         if(items){

@@ -74,7 +74,7 @@ function AddFac(props) {
                 }
             </select>
             <br />
-            <button onClick={() => addFac()}>Add</button>
+            <button className="buttons-list" onClick={() => addFac()}>Add</button>
             <br />
             {text}
         </div>

@@ -112,9 +112,9 @@ function EditProfile(props) {
             <p>City:</p>
             <input list='text' onChange={({ target: { value: inputItem } }) => setCity(inputItem)} value={city || ''} />
             <br />
-            <button onClick={() => edit()}>Edit</button>
+            <button className="buttons-list" onClick={() => edit()}>Edit</button>
             <br />
-            <button onClick={() => deleteProfile()}>Delete</button>
+            <button className="buttons-list" onClick={() => deleteProfile()}>Delete</button>
             <br />
             {text.firstName}
             <br />

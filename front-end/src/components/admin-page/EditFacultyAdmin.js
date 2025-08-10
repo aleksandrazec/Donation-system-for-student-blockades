@@ -138,9 +138,9 @@ function EditFacultyAdmin(props) {
             <p>Working hours:</p>
             <input list='text' onChange={({ target: { value: inputItem } }) => setWorkingHours(inputItem)} value={workingHours} placeholder={workingHours} />
             <br />
-            <button onClick={() => edit()}>Edit</button>
+            <button className="buttons-list" onClick={() => edit()}>Edit</button>
             <br />
-            <button onClick={() => deleteFac()}>Delete</button>
+            <button className="buttons-list" onClick={() => deleteFac()}>Delete</button>
             <br />
             {text.city}
             <br />

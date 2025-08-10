@@ -17,7 +17,7 @@ function UniversityCard(props){
 
     return(
         <div>
-            <button onClick={()=>{goToPage()}}>
+            <button className="buttons-list" onClick={()=>{goToPage()}}>
                 {name}
             </button>
         </div>

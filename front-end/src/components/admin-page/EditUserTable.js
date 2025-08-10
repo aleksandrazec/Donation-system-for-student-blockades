@@ -12,6 +12,7 @@ function EditUserTable(props) {
                 return (
                     <td
                         key={index}
+                         style={{backgroundColor: "#D90429", color: 'white'}} 
                         onClick={() => navigate(`/users/${obj.id}`)}
                     >
                         {value}
@@ -33,7 +34,7 @@ function EditUserTable(props) {
         if (!data[0]) return null
         return Object.keys(data[0]).map(key => {
             index++;
-            return <th key={index}>{key}</th>;
+            return <th key={index} style={{backgroundColor: "#2B2D42", color: "white"}}>{key}</th>;
         });
     }
 

@@ -1,6 +1,7 @@
 import TabItem from './TabItem';
 import { UserContext } from '../../Context'
 import { useContext } from 'react'
+import './styles.css'
 
 function TabContainer({ children }) {
     const user = useContext(UserContext)
@@ -43,12 +44,12 @@ function TabContainer({ children }) {
                     url: '/forums',
                 },
                 {
-                    text: 'Search donation requests',
-                    url: '/search',
-                },
-                {
                     text: 'Users',
                     url: '/users',
+                },
+                {
+                    text: 'Search donation requests',
+                    url: '/search',
                 },
                 {
                     text: 'Profile',

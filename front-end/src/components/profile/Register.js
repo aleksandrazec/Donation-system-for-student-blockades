@@ -45,7 +45,7 @@ function Register(props) {
             <input type="text" id="city" name="city" onChange={({ target: { value: input } }) => setCity(input)} value={city} /><br />
             <p>Password:</p>
             <input type="password" id="password" name="password" onChange={({ target: { value: input } }) => setPassword(input)} value={password} /><br />
-            <button onClick={() => register()}>Register</button>
+            <button className="buttons-list" onClick={() => register()}>Register</button>
 
         </div>
     )

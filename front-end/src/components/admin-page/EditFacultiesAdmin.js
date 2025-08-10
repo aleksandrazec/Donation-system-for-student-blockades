@@ -44,7 +44,7 @@ function EditFacultiesAdmin(props) {
             {
                 faculties ?
                     faculties.map(fac => <div>
-                        <button onClick={()=>goToPage(fac.id)} key={fac.id}>Edit {fac.name}</button><br />
+                        <button className="buttons-list" onClick={()=>goToPage(fac.id)} key={fac.id}>Edit {fac.name}</button><br />
                     </div>
                     )
                     :

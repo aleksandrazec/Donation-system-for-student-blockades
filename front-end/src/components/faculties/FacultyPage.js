@@ -78,11 +78,11 @@ function FacultyPage(props) {
                 info.name !== '' ?
                     <div>
                         <h1>{info.name}</h1>
-                        <h3 onClick={() => { goToUni() }}>Of university: {info.university}</h3>
-                        <h3>Working hours: {info.working_hours}</h3>
-                        <h3>City: {info.city}</h3>
-                        <h3>Address: {info.address}</h3>
-                        <h3>Coordinates: {info.coordinates}</h3>
+                        <p>University: <span onClick={() => { goToUni() }} style={{ textDecoration: "underline", color: "#D90429" }}>{info.university}</span></p>
+                        <p>City: {info.city}</p>
+                        <p>Address: {info.address}</p>
+                        <p>Coordinates: {info.coordinates}</p>
+                        <p>Working hours: {info.working_hours}</p>
                     </div>
                     :
                     <p>Loading</p>
@@ -100,9 +100,9 @@ function FacultyPage(props) {
             <div>
                 <h1>Forums</h1>
                 {
-                    forums && forums.length > 0?
-                    forums.map(forum=> <ForumCard prompt={forum.prompt} date={forum.date} name={forum.name} id={forum.id} key={forum.id} faculty_id={forum.faculty_id}/>)
-                                    :
+                    forums && forums.length > 0 ?
+                        forums.map(forum => <ForumCard prompt={forum.prompt} date={forum.date} name={forum.name} id={forum.id} key={forum.id} faculty_id={forum.faculty_id} />)
+                        :
                         <p>No forums available.</p>
                 }
             </div>

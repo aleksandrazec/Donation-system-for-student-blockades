@@ -115,9 +115,9 @@ function EditPage(props) {
                     :
                     <></>
             }
-            <button onClick={() => edit()}>Edit</button>
+            <button className="buttons-list" onClick={() => edit()}>Edit</button>
             <br />
-            <button onClick={() => deleteReq()}>Delete</button>
+            <button className="buttons-list" onClick={() => deleteReq()}>Delete</button>
             <br />
             {text.quantity}
             <br />

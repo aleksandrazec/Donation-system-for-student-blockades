@@ -93,9 +93,9 @@ function EditUser(props) {
                     :
                     <></>
             }
-            <button onClick={() => edit()}>Edit</button>
+            <button className="buttons-list" onClick={() => edit()}>Edit</button>
             <br />
-            <button onClick={() => deleteUser()}>Delete</button>
+            <button className="buttons-list" onClick={() => deleteUser()}>Delete</button>
             <br />
             {text}
         </div>

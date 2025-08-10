@@ -27,7 +27,7 @@ function AddUni(props) {
             <p>Name:</p>
             <input list='text' onChange={({ target: { value: inputItem } }) => setUni(inputItem)} value={uni} />
             <br />
-            <button onClick={()=>addUni()}>Add</button>
+            <button className="buttons-list" onClick={()=>addUni()}>Add</button>
             <br />
             {text}
         </div>

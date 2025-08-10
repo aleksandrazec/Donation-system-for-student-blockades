@@ -36,7 +36,10 @@ function EditDonationRequests(props) {
     }, [id])
 
     return (
-        <EditTable data={requests} />
+        <div>
+            <h1>Edit donation requests:</h1>
+            <EditTable data={requests} />
+        </div>
     )
 }
 

@@ -38,7 +38,7 @@ function Sort(props) {
 
                 {
                     sortedBy.byQuantity ?
-                        <select name="quantityOptions" id="quantityOptions" onChange={(e) => setQuantity(e.target.value === 'ASC')}>
+                        <select className="sortSelect" name="quantityOptions" id="quantityOptions" onChange={(e) => setQuantity(e.target.value === 'ASC')}>
                             <option value="ASC" >Ascending</option>
                             <option value="DSC" >Descending</option>
                         </select>
@@ -52,7 +52,7 @@ function Sort(props) {
 
                 {
                     sortedBy.byUrgencyLevel ?
-                        <select name="urgencyLevelOptions" id="urgencyLevelOptions" onChange={(e) => setUrgencyLevel(e.target.value === 'ASC')}>
+                        <select className="sortSelect"  name="urgencyLevelOptions" id="urgencyLevelOptions" onChange={(e) => setUrgencyLevel(e.target.value === 'ASC')}>
                             <option value="ASC" >Ascending</option>
                             <option value="DSC" >Descending</option>
                         </select>
@@ -66,7 +66,7 @@ function Sort(props) {
 
                 {
                     sortedBy.byDate ?
-                        <select name="dateOptions" id="dateOptions" onChange={(e) => setDate(e.target.value === 'ASC')}>
+                        <select className="sortSelect"  name="dateOptions" id="dateOptions" onChange={(e) => setDate(e.target.value === 'ASC')}>
                             <option value="ASC" >Ascending</option>
                             <option value="DSC" >Descending</option>
                         </select>

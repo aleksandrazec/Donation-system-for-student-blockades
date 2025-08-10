@@ -32,9 +32,9 @@ function ForumCard(props) {
     return (
         <div>
             <div>
-                <h2 onClick={()=>goToForum()}>{prompt}</h2>
+                <h3 onClick={()=>goToForum()}>{prompt}</h3>
             </div>
-            <h3>Posted on {date} by <span onClick={() => goToFaculty()}>{name}</span></h3>
+            <p>Posted on {date} by <span style={{ textDecoration: "underline", color: "#D90429" }} onClick={() => goToFaculty()}>{name}</span></p>
         </div>
     )
 

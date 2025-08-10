@@ -49,7 +49,7 @@ dataPool.listCitizen=()=>{
 
 dataPool.listNotAdmin=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT * FROM User WHERE role!='Admin' `, (err,res, fields)=>{
+    conn.query(`SELECT id, email, first_name, last_name, city, role FROM User WHERE role!='Admin' `, (err,res, fields)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -299,7 +299,7 @@ dataPool.deleteDonationRequest=(id)=>{
 
 dataPool.listDonationRequestFac=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query('SELECT * FROM Donation_request WHERE faculty_id = ?', id, (err,res)=>{
+    conn.query('SELECT id, item, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date FROM Donation_request WHERE faculty_id = ?', id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -308,7 +308,7 @@ dataPool.listDonationRequestFac=(id)=>{
 
 dataPool.listDonationRequestCity=(city)=>{
   return new Promise((resolve, reject)=>{
-    conn.query('SELECT item, type, urgency_level, quantity,  date, name, university, city FROM Type_of_donation INNER JOIN Donation_request ON Type_of_donation.subtype=Donation_request.item INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id WHERE city = ? ORDER BY date DESC', city, (err,res)=>{
+    conn.query('SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Type_of_donation INNER JOIN Donation_request ON Type_of_donation.subtype=Donation_request.item INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id WHERE city = ? ORDER BY date DESC', city, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -317,7 +317,7 @@ dataPool.listDonationRequestCity=(city)=>{
 
 dataPool.getDonationRequest=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query('SELECT * FROM Donation_request WHERE id = ?', id, (err,res)=>{
+    conn.query('SELECT item, id, faculty_id, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date FROM Donation_request WHERE id = ?', id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -326,7 +326,7 @@ dataPool.getDonationRequest=(id)=>{
 
 dataPool.listForumsASC=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY date ASC`, (err,res)=>{
+    conn.query(`SELECT prompt, DATE_FORMAT(date, "%M %d %Y") AS date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY CASE WHEN prompt <=> 'Questions?' THEN 1 ELSE 0 END, date ASC`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -335,7 +335,7 @@ dataPool.listForumsASC=()=>{
 
 dataPool.listForumsByFac=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE faculty_id = ? ORDER BY date DESC`, id, (err,res)=>{
+    conn.query(`SELECT prompt, DATE_FORMAT(date, "%M %d %Y") AS date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE faculty_id = ? ORDER BY CASE WHEN prompt <=> 'Questions?' THEN 0 ELSE 1 END, date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -344,7 +344,7 @@ dataPool.listForumsByFac=(id)=>{
 
 dataPool.listForumsDSC=()=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY date DESC`, (err,res)=>{
+    conn.query(`SELECT prompt, DATE_FORMAT(date, "%M %d %Y") AS date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id ORDER BY CASE WHEN prompt <=> 'Questions?' THEN 1 ELSE 0 END, date DESC`, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -353,7 +353,7 @@ dataPool.listForumsDSC=()=>{
 
 dataPool.findForum=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT prompt, date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE Forum.id= ?`, [id], (err,res)=>{
+    conn.query(`SELECT prompt, DATE_FORMAT(date, "%M %d %Y") AS date, name, Forum.faculty_id, Forum.id FROM Forum INNER JOIN Faculty on Forum.faculty_id=Faculty.id WHERE Forum.id= ?`, [id], (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -380,7 +380,7 @@ dataPool.deleteForum=(id)=>{
 
 dataPool.getComments=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT Comment.id , text, Comment.date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id IS NULL AND forum_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
+    conn.query(`SELECT Comment.id , text, DATE_FORMAT(Comment.date, "%M %d %Y") AS date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id IS NULL AND forum_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
       return resolve(res)
     })
@@ -389,7 +389,7 @@ dataPool.getComments=(id)=>{
 
 dataPool.getReplies=(id)=>{
   return new Promise((resolve, reject)=>{
-    conn.query(`SELECT Comment.id , text, Comment.date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
+    conn.query(`SELECT Comment.id , text, DATE_FORMAT(Comment.date, "%M %d %Y") AS date, reply_id, first_name, last_name, Comment.user_id, forum_id FROM Comment INNER JOIN User on Comment.user_id=User.id INNER JOIN Forum ON Forum.id=Comment.forum_id INNER JOIN Faculty ON Faculty.id=Forum.faculty_id WHERE reply_id = ? ORDER BY CASE WHEN Comment.user_id <=> Faculty.user_id THEN 0 ELSE 1 END, Comment.date DESC`, id, (err,res)=>{
       if(err){return reject(err)}
       console.log(res)
       return resolve(res)

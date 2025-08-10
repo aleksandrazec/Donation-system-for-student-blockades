@@ -5,7 +5,7 @@ import api from '../../services/api'
 
 function Profile(props) {
     const user = useContext(UserContext)
-    const {setUser} = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
     const navigate = useNavigate()
 
     const [userInfo, setUserInfo] = useState({
@@ -68,7 +68,7 @@ function Profile(props) {
         }
     }
 
-    const edit=async()=>{
+    const edit = async () => {
         try {
             navigate(`/editprofile`)
         } catch (error) {
@@ -80,19 +80,21 @@ function Profile(props) {
         <div>
             <h1>Your profile</h1>
             <h3>{userInfo.first_name} {userInfo.last_name}</h3>
-            <h3>Email: {userInfo.email}</h3>
-            <h3>City: {userInfo.city}</h3>
-            <h3>Role: {userInfo.role}</h3>
-            {
-                userInfo.role === "Student" || userInfo.role === "Admin" ?
-                    <div>
-                        <button onClick={() => resign()}>Resign as {userInfo.role}</button><br />
-                    </div>
-                    :
-                    <></>
-            }
-            <button onClick={()=>edit()}>Edit profile</button><br />
-            <button onClick={() => logout()}>Logout</button><br />
+            <p>Email: {userInfo.email}</p>
+            <p>City: {userInfo.city}</p>
+            <p>Role: {userInfo.role}</p>
+            <div className="button-div">
+                {
+                    userInfo.role === "Student" || userInfo.role === "Admin" ?
+                        <div>
+                            <button className="buttons-list" onClick={() => resign()}>Resign as {userInfo.role}</button><br />
+                        </div>
+                        :
+                        <></>
+                }
+                <button className="buttons-list" onClick={() => edit()}>Edit profile</button><br />
+                <button className="buttons-list" onClick={() => logout()}>Logout</button><br />
+            </div>
         </div>
     )
 }

@@ -10,7 +10,7 @@ function EditTable(props) {
             index++;
             if (value === 'Edit') {
                 return (
-                    <td key={index} onClick={() => navigate(`/editpg/${obj.id}`)}>
+                    <td key={index} style={{backgroundColor: "#D90429", color: 'white'}} onClick={() => navigate(`/editpg/${obj.id}`)}>
                         {value}
                     </td>
                 );
@@ -30,7 +30,11 @@ function EditTable(props) {
     function getHeadings(data) {
         return Object.keys(data[0]).map(key => {
             index++;
-            return <th key={index}>{key}</th>;
+            if (key === 'Edit') {
+                return <th key={index} style={{backgroundColor: "#D90429", color: "white"}}>{key}</th>;
+            } else {
+                return <th key={index} style={{backgroundColor: "#2B2D42", color: "white"}}>{key}</th>;
+            }
         });
     }
 

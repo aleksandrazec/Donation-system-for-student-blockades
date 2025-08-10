@@ -23,7 +23,7 @@ function Table(props) {
         const keys = Object.keys(data[0] || {})
         return keys.map(key => {
             index++
-            return <th key={index}>{key}</th>
+            return <th key={index} style={{backgroundColor: "#2B2D42", color: "white"}}>{key}</th>
         });
     }
 

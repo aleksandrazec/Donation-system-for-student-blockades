@@ -17,8 +17,8 @@ function ForumPage(props) {
         name: undefined
     })
     const [comments, setComments] = useState()
-    const [commentToBe, setCommentToBe]=useState()
-    const [text, setText]=useState('')
+    const [commentToBe, setCommentToBe] = useState()
+    const [text, setText] = useState('')
 
     const goToFaculty = async () => {
         try {
@@ -53,12 +53,12 @@ function ForumPage(props) {
         }
         getComments();
         getInfo();
-    }, [])
+    }, [id])
 
-    const postComment=async()=>{
-        if(user.role==='Guest'){
+    const postComment = async () => {
+        if (user.role === 'Guest') {
             setText('Please log in to post comments')
-        }else{
+        } else {
             try {
                 api.post(`/forums/comment`, { text: commentToBe, user_id: user.user_id, forum_id: id })
                     .then(result => {
@@ -79,24 +79,26 @@ function ForumPage(props) {
                 info ?
                     <div>
                         <div>
-                            <h2>{info.prompt}</h2>
+                            <h1>{info.prompt}</h1>
                         </div>
-                        <h3>Posted on {info.date} by <a onClick={() => goToFaculty()}>{info.name}</a></h3>
+                        <h3>Posted on {info.date} by <span onClick={() => goToFaculty()} style={{ textDecoration: "underline", color: "#D90429" }}>{info.name}</span></h3>
                     </div>
                     :
                     <></>
             }
             <div>
-                <h2>Comments: </h2>
-  <input type="text" id="comment" name="comment" onChange={({target: {value: input}}) => setCommentToBe(input)} value={commentToBe}/><br/>
-  <button onClick={()=>postComment()}>Comment</button>
-<p>{text}</p>
-{
-    comments ?
-    comments.map(com => <Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id}/>)
-:
-    <></>
-}
+                <input  className='comment' type="text" id="comment" name="comment" onChange={({ target: { value: input } }) => setCommentToBe(input)} value={commentToBe} />
+                <button className='reply-button' onClick={() => postComment()}>Comment</button>
+                <p>{text}</p>
+                {
+                    comments && comments.length > 0?
+                        <div>
+                            <h1>Comments: </h1>
+                            {comments.map(com => <Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id} />)}
+                        </div>
+                        :
+                        <h1>No comments yet.</h1>
+                }
             </div>
         </div>
     )

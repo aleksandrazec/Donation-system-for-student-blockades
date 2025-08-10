@@ -103,8 +103,8 @@ function Search(props) {
         }
     }
     const arraySearch = (element) => {
-        var regex = `.*` + textInput + `.*`
-        return element.item.match(regex)
+        const regex = new RegExp(`.*${textInput}.*`, 'i');
+        return regex.test(element.item);
     }
     const format = (dataObj, stateKey) => {
         const { [stateKey]: items, [stateKey + 'State']: stateArray } = dataObj;
@@ -136,10 +136,9 @@ function Search(props) {
                     <></>
             }
             <h1>Search for item: </h1>
-            <input type="text" id="searchForItem" placeholder="E.g. bread, meat, ..."
+            <input className='search-bar' type="text" id="searchForItem" placeholder="E.g. bread, salami, ..."
                 onChange={({ target: { value: input } }) => setTextInput(input)} value={textInput} />
-            <br />
-            <button onClick={() => searchButton()}> Search </button>
+            <button className="search-button" onClick={() => searchButton()}> Search </button>
             {
                 searchResult === null ? null : (
                     searchResult.length > 0

@@ -62,7 +62,7 @@ function EditFaculty(props) {
             <p>Working hours:</p>
             <input list='text' onChange={({ target: { value: inputItem } }) => setWorkingHours(inputItem)} value={workingHours} placeholder={workingHours} />
             <br />
-            <button onClick={() => edit()}>Edit</button>
+            <button className="buttons-list" onClick={() => edit()}>Edit</button>
             <p>{text}</p>
         </div>
     )

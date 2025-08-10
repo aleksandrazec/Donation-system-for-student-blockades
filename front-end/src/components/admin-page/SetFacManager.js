@@ -94,7 +94,7 @@ function SetFacManager() {
             </select>
 
             <br />
-            <button onClick={setStudentManager}>Set as student manager</button>
+            <button className="buttons-list" onClick={setStudentManager}>Set as student manager</button>
             <br />
             {text}
         </div>

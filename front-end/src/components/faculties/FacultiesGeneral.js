@@ -115,26 +115,29 @@ function FacultiesGeneral(props) {
     return (
         <div>
             {
-                faculty.id ?
-                    <div>
-                        <h3>You're the student manager of {faculty.name}</h3>
-                        <button onClick={() => createNewRequest()}>Add new donation request</button>
-                        <button onClick={() => editRequests()}>Edit donation requests</button>
-                        <button onClick={() => createForum()}>Add new forum</button>
-                        <button onClick={() => deleteForum()}>Delete forums</button>
-                        <button onClick={() => editFac()}>Edit faculty information</button>
+                faculty.id && user.role === "Student" ?
+                    <div className="button-div">
+                        <h1>You're the student manager of {faculty.name}</h1>
+                        <button className="buttons-list" onClick={() => editFac()}>Edit faculty information</button><br />
+                        <button className="buttons-list" onClick={() => createNewRequest()}>Add new donation request</button><br />
+                        <button className="buttons-list" onClick={() => editRequests()}>Edit donation requests</button><br />
+                        <button className="buttons-list" onClick={() => createForum()}>Add new forum</button><br />
+                        <button className="buttons-list" onClick={() => deleteForum()}>Delete forums</button><br />
                     </div>
                     :
-                    <div>
-                        <h3>You're an admin</h3>
-                        <button onClick={() => addUni()}>Add new university in blockade</button>
-                        <button onClick={() => addFac()}>Add new faculty in blockade</button>
-                        <button onClick={()=>setFacManger()}>Set faculty's student manager</button>
-                        <button onClick={()=>editFaculties()}>Edit faculties in blockade</button>
-                    </div>
+                    user.role === "Admin" ?
+                        <div className="button-div">
+                            <h1>You're an admin</h1>
+                            <button className="buttons-list" onClick={() => addUni()}>Add new university in blockade</button><br />
+                            <button className="buttons-list" onClick={() => addFac()}>Add new faculty in blockade</button><br />
+                            <button className="buttons-list" onClick={() => setFacManger()}>Set faculty's student manager</button><br />
+                            <button className="buttons-list" onClick={() => editFaculties()}>Edit faculties in blockade</button><br />
+                        </div>
+                        :
+                        <></>
             }
-            <div>
-                <h3>Look at citizens POV</h3>
+            <div className="button-div">
+                <h1>Look at faculties in blockade</h1>
                 <button onClick={() => facHome()}>Faculties Home</button>
             </div>
         </div>

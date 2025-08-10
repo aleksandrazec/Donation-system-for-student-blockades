@@ -18,7 +18,7 @@ function Comment(props) {
     useEffect(() => {
         const getReplies = () => {
             try {
-                api.post(`/forums/getreplies`, { id:id })
+                api.post(`/forums/getreplies`, { id: id })
                     .then(result => {
                         console.log(result.data)
                         setReplies(result.data)
@@ -51,15 +51,17 @@ function Comment(props) {
 
     return (
         <div>
-            <h2>{text}</h2>
-            <h3>Posted on {date} by {first_name} {last_name}</h3>
-            <input type="text" id="reply" name="reply" onChange={({ target: { value: input } }) => setReplyToBe(input)} value={replyToBe} /><br />
-            <button onClick={() => postReply()}>Reply</button>
-            <p>{textt}</p>
-            <div id='replies' style={{ color: "red" }}>
+            <div>
+                <h3>{text}</h3>
+                <p>Posted on {date} by {first_name} {last_name}</p>
+                <input  className='comment' type="text" id="reply" name="reply" onChange={({ target: { value: input } }) => setReplyToBe(input)} value={replyToBe} />
+                <button className='reply-button' onClick={() => postReply()}>Reply</button>
+                <p>{textt}</p>
+            </div>
+            <div id='replies'>
                 {
                     replies ?
-                        replies.map(com => <Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id} />)
+                        replies.map(com => <div className='reply'><Comment id={com.id} forum_id={com.forum_id} text={com.text} key={com.id} date={com.date} first_name={com.first_name} last_name={com.last_name} user_id={com.user_id} /></div>)
                         :
                         <></>
                 }

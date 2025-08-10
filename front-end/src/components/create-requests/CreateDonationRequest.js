@@ -122,7 +122,7 @@ function CreateDonationRequest(props){
                 }
             </select>
             <br/>
-            <button onClick={()=> addDonationRequest()}>Create Donation request</button>
+            <button  className="buttons-list" onClick={()=> addDonationRequest()}>Create Donation request</button>
             <br/>
             {text}
         </div>
