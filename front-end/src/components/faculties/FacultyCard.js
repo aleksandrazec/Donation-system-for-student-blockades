@@ -10,7 +10,7 @@ function FacultyCard(props){
 
    const goToPage=async()=>{
     try {
-        navigate(`/faculty/${id}`)
+        navigate(`/facultypage/${id}`)
     } catch (error) {
         console.error(error)
     }

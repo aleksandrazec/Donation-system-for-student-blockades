@@ -14,7 +14,7 @@ function ForumCard(props) {
 
     const goToForum=async()=>{
         try {
-            navigate(`/forums/${id}`)
+            navigate(`/forumspage/${id}`)
         } catch (error) {
             console.error(error)
         }
@@ -23,7 +23,7 @@ function ForumCard(props) {
 
     const goToFaculty = async () => {
         try {
-            navigate(`/faculty/${faculty_id}`)
+            navigate(`/facultypage/${faculty_id}`)
         } catch (error) {
             console.error(error)
         }

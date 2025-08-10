@@ -19,7 +19,7 @@ function FacultiesGeneral(props) {
     useEffect(() => {
         if (user.role === 'Guest' || user.role === 'Citizen') {
             try {
-                navigate('/faculties')
+                navigate('/facultieshome')
             } catch (error) {
                 console.error(error)
             }
@@ -38,7 +38,7 @@ function FacultiesGeneral(props) {
             }
         } else {
             console.error("this is not a user role")
-            navigate('/faculties')
+            navigate('/facultieshome')
         }
     }, [user, navigate])
 
@@ -72,7 +72,7 @@ function FacultiesGeneral(props) {
     }
     const facHome = async () => {
         try {
-            navigate(`/faculties`)
+            navigate(`/facultieshome`)
         } catch (error) {
             console.error(error)
         }

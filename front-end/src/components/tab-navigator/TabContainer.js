@@ -18,11 +18,11 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Forums',
-                    url: '/forums',
+                    url: '/forumshome',
                 },
                 {
                     text: 'Search donation requests',
-                    url: '/search',
+                    url: '/searchdonations',
                 },
                 {
                     text: 'Profile',
@@ -41,15 +41,15 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Forums',
-                    url: '/forums',
+                    url: '/forumshome',
                 },
                 {
                     text: 'Users',
-                    url: '/users',
+                    url: '/usershome',
                 },
                 {
                     text: 'Search donation requests',
-                    url: '/search',
+                    url: '/searchdonations',
                 },
                 {
                     text: 'Profile',
@@ -64,15 +64,15 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Faculties in blockade',
-                    url: '/faculties',
+                    url: '/facultieshome',
                 },
                 {
                     text: 'Forums',
-                    url: '/forums',
+                    url: '/forumshome',
                 },
                 {
                     text: 'Search donation requests',
-                    url: '/search',
+                    url: '/searchdonations',
                 },
                 {
                     text: 'Profile',
@@ -87,15 +87,15 @@ function TabContainer({ children }) {
                 },
                 {
                     text: 'Faculties in blockade',
-                    url: '/faculties',
+                    url: '/facultieshome',
                 },
                 {
                     text: 'Forums',
-                    url: '/forums',
+                    url: '/forumshome',
                 },
                 {
                     text: 'Search donation requests',
-                    url: '/search',
+                    url: '/searchdonations',
                 },
                 {
                     text: 'Log In',

@@ -40,6 +40,25 @@ app.use('/donationrequests', donationrequests)
 app.use('/forums', forums)
 app.use('/search', search)
 
+app.get("/ping", async (req, res) => {
+    function checkDatabaseConnection() {
+        return new Promise((resolve, reject) => {
+            connection.query("SELECT 1", (err, res) => {
+                if (err) return reject(err);
+                resolve(res);
+            });
+        });
+    }
+
+    try {
+        await checkDatabaseConnection();
+        res.status(200).send("OK");
+    } catch (err) {
+        console.error("DB health check failed:", err.message);
+        res.status(500).send("Unhealthy");
+    }
+})
+
 app.listen(process.env.PORT || port, ()=>{
 console.log(`Server is running on port: ${process.env.PORT || port}`)
 })

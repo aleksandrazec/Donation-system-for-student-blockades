@@ -38,16 +38,16 @@ class AppRouter extends Component {
                         <Route path="login" element={<LogIn />} />
                         <Route path="register" element={<Register />} />
                         <Route path="registersuccess" element={<RegisterSuccessPage />} />
-                        <Route path="faculties" element={<FacultiesHome />} />
+                        <Route path="facultieshome" element={<FacultiesHome />} />
                         <Route path="facultiesgen" element={<FacultiesGeneral />} />
                         <Route path="university/:name" element={<UniversityPage />} />
-                        <Route path="faculty/:id" element={<FacultyPage />} />
+                        <Route path="facultypage/:id" element={<FacultyPage />} />
                         <Route path="create/:id" element={<CreateDonationRequest />} />
-                        <Route path="search" element={<Search />} />
-                        <Route path="forums" element={<ForumsHome />} />
+                        <Route path="searchdonations" element={<Search />} />
+                        <Route path="forumshome" element={<ForumsHome />} />
                         <Route path="createf/:id" element={<CreateForum />} />
                         <Route path="editf/:id" element={<EditForum />} />
-                        <Route path="forums/:id" element={<ForumPage />} />
+                        <Route path="forumspage/:id" element={<ForumPage />} />
                         <Route path="edit/:id" element={<EditDonationRequests />} />
                         <Route path="editpg/:id" element={<EditPage />} />
                         <Route path="editfac/:id" element={<EditFaculty />} />
@@ -58,8 +58,8 @@ class AppRouter extends Component {
                         <Route path="facman" element={<SetFacManager />} />
                         <Route path="editfacs" element={<EditFacultiesAdmin />} />
                         <Route path="editfacs/:id" element={<EditFacultyAdmin />} />
-                        <Route path="users" element={<Users />} />
-                        <Route path="users/:id" element={<EditUser />} />
+                        <Route path="usershome" element={<Users />} />
+                        <Route path="userspage/:id" element={<EditUser />} />
 
                     </Route>
                 </Routes>

@@ -13,7 +13,7 @@ function EditUserTable(props) {
                     <td
                         key={index}
                          style={{backgroundColor: "#D90429", color: 'white'}} 
-                        onClick={() => navigate(`/users/${obj.id}`)}
+                        onClick={() => navigate(`/userspage/${obj.id}`)}
                     >
                         {value}
                     </td>

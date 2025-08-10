@@ -22,7 +22,7 @@ function ForumPage(props) {
 
     const goToFaculty = async () => {
         try {
-            navigate(`/faculty/${info.faculty_id}`)
+            navigate(`/facultypage/${info.faculty_id}`)
         } catch (error) {
             console.error(error)
         }
