@@ -1,3 +1,785 @@
-[dotenv@17.2.1] injecting env (4) from .env -- tip: 📡 observe env with Radar: https://dotenvx.com/radar
+[dotenv@17.2.1] injecting env (4) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
 Server is running on port: 3333
 Connection established
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+Forums listed
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+Forums listed
+Forums listed
+[
+  {
+    id: 35,
+    text: 'blabla',
+    date: 'August 10 2025',
+    reply_id: null,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 9
+  }
+]
+Forum found
+[]
+[]
+Forums listed
+[
+  {
+    id: 31,
+    text: 'Announcement: bla bla bla',
+    date: 'August 10 2025',
+    reply_id: null,
+    first_name: 'ETF',
+    last_name: 'Manager',
+    user_id: 6,
+    forum_id: 8
+  }
+]
+Forum found
+[
+  {
+    id: 32,
+    text: 'Good announcement',
+    date: 'August 10 2025',
+    reply_id: 31,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 8
+  }
+]
+[
+  {
+    id: 32,
+    text: 'Good announcement',
+    date: 'August 10 2025',
+    reply_id: 31,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 8
+  }
+]
+[
+  {
+    id: 36,
+    text: 'etf reply',
+    date: 'August 10 2025',
+    reply_id: 32,
+    first_name: 'ETF',
+    last_name: 'Manager',
+    user_id: 6,
+    forum_id: 8
+  },
+  {
+    id: 33,
+    text: 'Yes',
+    date: 'August 10 2025',
+    reply_id: 32,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 8
+  }
+]
+[
+  {
+    id: 36,
+    text: 'etf reply',
+    date: 'August 10 2025',
+    reply_id: 32,
+    first_name: 'ETF',
+    last_name: 'Manager',
+    user_id: 6,
+    forum_id: 8
+  },
+  {
+    id: 33,
+    text: 'Yes',
+    date: 'August 10 2025',
+    reply_id: 32,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 8
+  }
+]
+[]
+[]
+[]
+[]
+Forums listed
+[
+  {
+    id: 34,
+    text: 'First comment',
+    date: 'August 10 2025',
+    reply_id: null,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 7
+  }
+]
+Forum found
+[]
+[]
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+Forums listed
+[
+  {
+    id: 7,
+    email: 'elfak@gmail.com',
+    password: '1234',
+    first_name: 'ELFAK',
+    last_name: 'Manager',
+    city: 'Nis',
+    role: 'Student'
+  }
+]
+LOGIN OK
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  },
+  logged_in: true,
+  user_id: 7,
+  role: 'Student'
+}
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+[
+  {
+    COLUMN_TYPE: "enum('Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic')"
+  }
+]
+enum('Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic')
+Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic
+[
+  'Food',
+  'Electronics',
+  'Clothing',
+  'Toiletries',
+  'Bedding',
+  'Beverage',
+  'Wires',
+  'Epic'
+]
+[
+  { subtype: 'Bread' },
+  { subtype: 'Copper wire' },
+  { subtype: 'Salami' },
+  { subtype: 'Toilet paper' },
+  { subtype: 'Water' }
+]
+[ { type: 'Beverage' } ]
+New donation request added!!
+[ { type: 'Toiletries' } ]
+New donation request added!!
+[ { type: 'Food' } ]
+New donation request added!!
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+Field/s missing
+[
+  {
+    item: 'Toilet paper',
+    type: 'Toiletries',
+    urgency_level: 'Not urgent',
+    quantity: 16,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Salami',
+    type: 'Food',
+    urgency_level: 'Urgent',
+    quantity: 3,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Water',
+    type: 'Beverage',
+    urgency_level: 'Mildly urgent',
+    quantity: 6,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Bread',
+    type: 'Food',
+    urgency_level: 'Mildly urgent',
+    quantity: 3,
+    date: 'August 10 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  }
+]
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+[
+  {
+    item: 'Toilet paper',
+    type: 'Toiletries',
+    urgency_level: 'Not urgent',
+    quantity: 16,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Salami',
+    type: 'Food',
+    urgency_level: 'Urgent',
+    quantity: 3,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Water',
+    type: 'Beverage',
+    urgency_level: 'Mildly urgent',
+    quantity: 6,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Bread',
+    type: 'Food',
+    urgency_level: 'Mildly urgent',
+    quantity: 3,
+    date: 'August 10 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  }
+]
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+Forums listed
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+[
+  { name: 'Bread', key: 1 },
+  { name: 'Copper wire', key: 2 },
+  { name: 'Salami', key: 3 },
+  { name: 'Toilet paper', key: 4 },
+  { name: 'Water', key: 5 }
+]
+[
+  { name: 'Faculty of Electronic Engineering', key: 1 },
+  { name: 'School of Electrical Engineering', key: 2 }
+]
+[ { name: 'Belgrade', key: 1 }, { name: 'Nis', key: 2 } ]
+[
+  {
+    COLUMN_TYPE: "enum('Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic')"
+  }
+]
+enum('Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic')
+Food','Electronics','Clothing','Toiletries','Bedding','Beverage','Wires','Epic
+[
+  { name: 'Food', key: 1 },
+  { name: 'Electronics', key: 2 },
+  { name: 'Clothing', key: 3 },
+  { name: 'Toiletries', key: 4 },
+  { name: 'Bedding', key: 5 },
+  { name: 'Beverage', key: 6 },
+  { name: 'Wires', key: 7 },
+  { name: 'Epic', key: 8 }
+]
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+Forums listed
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+Forums listed
+[
+  {
+    id: 35,
+    text: 'blabla',
+    date: 'August 10 2025',
+    reply_id: null,
+    first_name: 'Citizen',
+    last_name: 'Belgrade',
+    user_id: 9,
+    forum_id: 9
+  }
+]
+Forum found
+[]
+[]
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Field/s missing
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  },
+  logged_in: true,
+  user_id: 7,
+  role: 'Student'
+}
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+[
+  {
+    item: 'Toilet paper',
+    type: 'Toiletries',
+    urgency_level: 'Not urgent',
+    quantity: 16,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Salami',
+    type: 'Food',
+    urgency_level: 'Urgent',
+    quantity: 3,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Water',
+    type: 'Beverage',
+    urgency_level: 'Mildly urgent',
+    quantity: 6,
+    date: 'August 11 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  },
+  {
+    item: 'Bread',
+    type: 'Food',
+    urgency_level: 'Mildly urgent',
+    quantity: 3,
+    date: 'August 10 2025',
+    faculty: 'Faculty of Electronic Engineering',
+    university: 'University of Niš',
+    city: 'Nis'
+  }
+]
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+Forums listed
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+Forums listed
+{
+  name: 'Faculty of Electronic Engineering',
+  city: 'Nis',
+  address: 'Aleksandra Medvedeva 4',
+  coordinates: '43.33146766183455, 21.89260782687766',
+  working_hours: '24/7',
+  university: 'University of Niš',
+  id: 7
+}
+{
+  id: 7,
+  email: 'elfak@gmail.com',
+  password: '1234',
+  first_name: 'ELFAK',
+  last_name: 'Manager',
+  city: 'Nis',
+  role: 'Student'
+}
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  },
+  logged_in: false,
+  user_id: 0,
+  role: 'Guest'
+}
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Field/s missing
+Forums listed
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT * FROM (SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype) AS everything ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  }
+}
+Field/s missing
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+session data: 
+Session {
+  cookie: {
+    path: '/',
+    _expires: null,
+    originalMaxAge: null,
+    httpOnly: true,
+    secure: false
+  },
+  logged_in: false,
+  user_id: 0,
+  role: 'Guest'
+}
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+Forums listed
+Forums listed
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Forums listed
+[
+  { name: 'University of Belgrade', key: 1 },
+  { name: 'University of Niš', key: 2 }
+]
+OK
+i get to here
+SELECT item, type, urgency_level, quantity, DATE_FORMAT(date, "%M %d %Y") AS date, name AS faculty, university, city FROM Donation_request INNER JOIN Faculty ON Donation_request.faculty_id=Faculty.id INNER JOIN Type_of_donation ON Donation_request.item=Type_of_donation.subtype ORDER BY date DESC
+Field/s missing
+Search results: 
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
