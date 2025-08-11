@@ -64,7 +64,7 @@ function EditUser(props) {
             api.post(`/users/delete`, { id: id })
                 .then((result) => {
                     console.log(result.data)
-                    navigate(`/users`)
+                    navigate(`/usershome`)
                 })
                 .catch(err => console.error('api error: ', err));
 
